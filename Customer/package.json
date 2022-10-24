@@ -1,0 +1,23 @@
+{
+  "name": "clear-creek-catering",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "firebase": "^9.9.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnushaGoud29/Clear-Creek-Catering.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnushaGoud29/Clear-Creek-Catering/issues"
+  },
+  "homepage": "https://github.com/AnushaGoud29/Clear-Creek-Catering#readme"
+}

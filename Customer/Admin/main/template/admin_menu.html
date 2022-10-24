@@ -1,0 +1,839 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Clear Creek Catering</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <!-- <link href="../../../Customer/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- <link href="../../../Customer/css/bootstrap-icons.css" rel="stylesheet"> -->
+
+    <!-- <link href="../../../Customer/css/tooplate-crispy-kitchen.css" rel="stylesheet"> -->
+    <!-- <link href="../../assets/plugins/datatables/css/jquery.dataTables.min.css" rel="stylesheet"> -->
+    <link href="../css/style.css" rel="stylesheet">
+
+    <link href="../../../Customer/css/cart.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="loader"></div>
+    <nav class="navbar navbar-expand-lg bg-white shadow-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="index.html">
+                Clear Creek Catering
+            </a>
+
+
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+
+                   
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="orderonline.html">Order Online</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cart.html">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="myorder.html">My Orders</a>
+                    </li>
+                    <li class="nav-item" id="adminNav">
+                        <a class="nav-link " href="/admin/main/template">Admin</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <div id="navLogin" class="">
+                        <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#BookingModalSignin">SignIn/SignUp</button>
+                    </div>
+                    <div id="currentUserSection" class="">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-person" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                            </svg><span id="currentUser"></span>
+                        </button>
+
+                        <button id="logout" type="button" class="btn btn-default btn-sm">
+                            Logout
+                        </button>
+                    </div>
+
+
+                </ul>
+            </div>
+
+
+        </div>
+    </nav>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+     
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Dashboard</li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-speedometer"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="index.html">Admin Overview</a></li>
+                            <li><a href="restaurant-menus_1.html">Menus</a></li>
+                            <li><a >Offer</a></li>
+                            <li><a >Employees</a></li>
+                            
+                            <li><a href="adminOrders.html">Order</a></li>
+                            <li><a href="restaurant-custommer_1.html">Custommer</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                    
+                    
+                    
+
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col-sm-6 p-md-0">
+                    <div class="breadcrumb-range-picker">
+                        <span><i class="icon-calender"></i></span>
+                        
+                    </div>
+                </div>
+                <!-- <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>
+                    </ol>
+                </div> -->
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row justify-content-between mb-3">
+					<div class="col-!0 ">
+						<h2 class="page-heading">Hi,Welcome Back!</h2>
+						<p class="mb-0">Your admin</p>
+					</div>
+                    <div class="col-12">
+                        <button id="addMenuItem" type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminMenuModal">Add Sandwich Wraps</button>
+                        <button id="addToppings" type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminToppingModal">Add Toppings</button>
+                        <button id="addMeatOptionsBtn" type="button" class="custom-btn btn btn-danger" >Add Meat Options</button>
+                        <!-- <button id="addMenuItem" >Add Menu Item</button> -->
+                    </div>
+                </div>
+                <div class="row">
+             
+                    <div class="row" id="allMenuItems">
+                       
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        
+        <!--**********************************
+            Right sidebar start
+        ***********************************-->
+        <div class="sidebar-right">
+            <a class="sidebar-right-trigger gradient-5-x" href="javascript:void(0)">
+                <span><i class="fa fa-cog fa-spin"></i></span>
+            </a>
+            <div class="sidebar-right-inner">
+                <div class="admin-settings">
+                    <h4>Pick your style</h4>
+                    <div>
+                        <p>Background</p>
+                        <select class="form-control" name="theme_version" id="theme_version">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Layout</p>
+                        <select class="form-control" name="theme_layout" id="theme_layout">
+                            <option value="vertical">Vertical</option>
+                            <option value="horizontal">Horizontal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Sidebar</p>
+                        <select class="form-control" name="sidebar_style" id="sidebar_style">
+                            <option value="full">Full</option>
+                            <option value="mini">Mini</option>
+                            <option value="compact">Compact</option>
+                            <option value="overlay">Overlay</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Sidebar position</p>
+                        <select class="form-control" name="sidebar_position" id="sidebar_position">
+                            <option value="static">Static</option>
+                            <option value="fixed">Fixed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Header position</p>
+                        <select class="form-control" name="header_position" id="header_position">
+                            <option value="static">Static</option>
+                            <option value="fixed">Fixed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Container</p>
+                        <select class="form-control" name="container_layout" id="container_layout">
+                            <option value="wide">Wide</option>
+                            <option value="boxed">Boxed</option>
+                            <option value="wide-boxed">Wide Boxed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Direction</p>
+                        <select class="form-control" name="theme_direction" id="theme_direction">
+                            <option value="ltr">LTR</option>
+                            <option value="rtl">RTL</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Navigation Header</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_1" class="filled-in chk-col-primary" id="nav_header_bg_1">
+                                <label for="nav_header_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_2" class="filled-in chk-col-primary" id="nav_header_bg_2">
+                                <label for="nav_header_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_3" class="filled-in chk-col-primary" id="nav_header_bg_3">
+                                <label for="nav_header_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_4" class="filled-in chk-col-primary" id="nav_header_bg_4">
+                                <label for="nav_header_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_5" class="filled-in chk-col-primary" id="nav_header_bg_5">
+                                <label for="nav_header_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_6" class="filled-in chk-col-primary" id="nav_header_bg_6">
+                                <label for="nav_header_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_7" class="filled-in chk-col-primary" id="nav_header_bg_7">
+                                <label for="nav_header_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_8" class="filled-in chk-col-primary" id="nav_header_bg_8">
+                                <label for="nav_header_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_9" class="filled-in chk-col-primary" id="nav_header_bg_9">
+                                <label for="nav_header_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_10" class="filled-in chk-col-primary" id="nav_header_bg_10">
+                                <label for="nav_header_bg_10"></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Header</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_1" class="filled-in chk-col-primary" id="header_bg_1">
+                                <label for="header_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_2" class="filled-in chk-col-primary" id="header_bg_2">
+                                <label for="header_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_3" class="filled-in chk-col-primary" id="header_bg_3">
+                                <label for="header_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_4" class="filled-in chk-col-primary" id="header_bg_4">
+                                <label for="header_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_5" class="filled-in chk-col-primary" id="header_bg_5">
+                                <label for="header_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_6" class="filled-in chk-col-primary" id="header_bg_6">
+                                <label for="header_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_7" class="filled-in chk-col-primary" id="header_bg_7">
+                                <label for="header_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_8" class="filled-in chk-col-primary" id="header_bg_8">
+                                <label for="header_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_9" class="filled-in chk-col-primary" id="header_bg_9">
+                                <label for="header_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_10" class="filled-in chk-col-primary" id="header_bg_10">
+                                <label for="header_bg_10"></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Sidebar</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_1" class="filled-in chk-col-primary" id="sidebar_bg_1">
+                                <label for="sidebar_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_2" class="filled-in chk-col-primary" id="sidebar_bg_2">
+                                <label for="sidebar_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_3" class="filled-in chk-col-primary" id="sidebar_bg_3">
+                                <label for="sidebar_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_4" class="filled-in chk-col-primary" id="sidebar_bg_4">
+                                <label for="sidebar_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_5" class="filled-in chk-col-primary" id="sidebar_bg_5">
+                                <label for="sidebar_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_6" class="filled-in chk-col-primary" id="sidebar_bg_6">
+                                <label for="sidebar_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_7" class="filled-in chk-col-primary" id="sidebar_bg_7">
+                                <label for="sidebar_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_8" class="filled-in chk-col-primary" id="sidebar_bg_8">
+                                <label for="sidebar_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_9" class="filled-in chk-col-primary" id="sidebar_bg_9">
+                                <label for="sidebar_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_10" class="filled-in chk-col-primary" id="sidebar_bg_10">
+                                <label for="sidebar_bg_10"></label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Right sidebar end
+        ***********************************-->
+    </div>
+
+    <div class="modal fade" id="adminMenuModal" tabindex="-1" aria-labelledby="adminMenuModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="mb-0">Add Sandwich Wraps</h3>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body d-flex flex-column justify-content-center">
+                <div class="booking">
+
+
+                    <div class="col-lg-6 col-12">
+                        <label for="sandwichwrapname" class="form-label">Sandwich wrap name </label>
+
+                        <input type="text" name="sandwichwrapname" id="sandwichwrapname" class="form-control"
+                             required>
+                    </div>
+                    <br>
+
+    
+                    <div class="col-lg-6 col-12">
+                        <label for="imageUpload" class="form-label">Image Upload</label>
+
+                      <!-- click here to choose file -->
+                        <input type="file" name="files[]" onchange="uploadImage(this)" class="form-control" id="files">
+                        <!-- click here to upload file -->
+                        <input type="hidden"
+                            name="url"
+                            id="url">   
+                            <!-- <button type="button " onchange="uploadImage(this)">
+                                Upload Image
+                                </button> -->
+                            
+                             
+                    </div>
+                    <br>
+
+                    <div class="col-lg-6 col-12">
+                        <label for="bread" class="form-label">Bread</label>
+
+                        <input type="text" name="bread" id="bread" class="form-control"
+                             required>
+
+                            
+                             
+                    </div>
+                    <br>
+
+                    <div class="col-lg-6 col-12">
+                        <label for="description" class="form-label">Description</label>
+
+                        <textarea type="text" name="description" id="description" class="form-control"
+                             required> </textarea>
+
+                            
+                             
+                    </div>
+                    <br>
+
+                    <div class="col-lg-6 col-12">
+                        <label for="price" class="form-label">Price</label>
+
+                        <input type="text" name="price" id="price" class="form-control"
+                             required>
+                    </div>
+
+                    <br>
+
+                    <div class="col-lg-6 col-12">
+                        <input type="checkbox" id="available"  name="available" >
+                        <label for="available" class="form-label">Available</label>
+
+                       
+                        
+                    </div>
+
+                    <br>
+
+                    <div class="col-lg-6 col-12">
+                        <input type="checkbox" id="isTodaySpecial"  name="available" >
+                        <label for="isTodaySpecial" class="form-label">Is Today Special</label>
+
+                       
+                        
+                    </div>
+
+                    <br>
+
+                    <div class="col-lg-6 col-12">
+                        <label for="toppings" class="form-label">Toppings</label>
+                        <select name="toppings" id="toppings" multiple>
+                           
+                          </select>
+                       
+                        
+                    </div>
+
+                    <br>
+                    <!-- <div class="col-lg-6 col-12">
+                        <label for="meatOptions" class="form-label">Meat Options</label>
+                        <select name="meatOptions" id="meatOptions" multiple>
+                           
+                          </select>
+                       
+                        
+                    </div> -->
+
+
+
+                   
+                    
+
+                </div>
+
+<br>
+<h4 id="itemSuccess"></h4>
+<br>
+
+                <div class="col-lg-4 col-8">
+
+                    <button type="button" id="addMenuItemSave" class="form-control"
+                        style="background-color:white;">Save Menu</button>
+
+                </div>
+               
+
+            </div>
+        </div>
+
+
+        <div class="modal-footer">
+            
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="adminToppingModal" tabindex="-1" aria-labelledby="adminToppingModal"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="mb-0">Add Toppings</h3>
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body d-flex flex-column justify-content-center">
+            <div class="booking">
+
+                <div class="col-lg-6">
+                <div class="col-lg-6 col-12">
+                    <label for="toppingName" class="form-label">Topping name </label>
+
+                    <input type="text" name="toppingName" id="toppingName" class="form-control"
+                         required>
+                </div>
+                <br>
+               
+
+              
+
+                <div class="col-lg-6 col-12">
+                    <label for="tPrice" class="form-label">Price</label>
+
+                    <input type="text" name="tPrice" id="tPrice" class="form-control"
+                         required>
+                </div>
+
+                <br>
+
+                <div class="col-lg-6 col-12">
+                    <input type="checkbox" id="tavailable"  name="available" >
+                    <label for="tavailable" class="form-label">Available</label>
+
+                   
+                    
+                </div>
+
+                <br>
+
+                
+
+
+</div>
+<div class="col-lg-6">
+
+    <table id="toppingList" class="customers_cart" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="product-name">Toping</th>
+                <th class="product-price">Price</th>
+                <th class="product-price">Status</th>
+                <th class="product-price">Action</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+           
+        </tbody>
+        </table>
+
+</div>
+               
+                
+
+            </div>
+
+<br>
+<h4 id="toppingSuccess"></h4>
+<br>
+
+            <div class="col-lg-4 col-8">
+
+                <button type="button" id="addToppingSave" class="form-control"
+                    style="background-color:white;">Save Topping</button>
+
+            </div>
+           
+
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        
+    </div>
+
+</div>
+
+</div>
+
+
+
+<div class="modal fade" id="addMeatOptions" tabindex="-1" aria-labelledby="addMeatOptions"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="mb-0">Add Meat Options</h3>
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body d-flex flex-column justify-content-center">
+            <div class="booking">
+
+                <div class="col-lg-6">
+
+                    <div class="col-lg-6 col-12">
+                        <label for="sandwichwtapname" class="form-label">Sandwich Wrap Name</label>
+                        <select name="sandwichwtapname" id="sandwichwtapname">
+                           
+                          </select>
+                       
+                        
+                    </div>
+
+                    <br>
+
+                <div class="col-lg-6 col-12">
+                    <label for="meatName" class="form-label">Meat name </label>
+
+                    <input type="text" name="meatName" id="meatName" class="form-control"
+                         required>
+                </div>
+                <br>
+               
+
+              
+
+                <div class="col-lg-6 col-12">
+                    <label for="mPrice" class="form-label">Price</label>
+
+                    <input type="text" name="mPrice" id="mPrice" class="form-control"
+                         required>
+                </div>
+
+                <br>
+             
+
+
+</div>
+<div class="col-lg-6">
+
+    <table id="meatOptionList" class="customers_cart" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="product-name">Sandwich Wrap</th>
+                <th class="product-name">Meat Options</th>
+                <th class="product-price">Price</th>
+                <th class="product-price">Action</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+           
+        </tbody>
+        </table>
+
+</div>
+               
+                
+
+            </div>
+
+<br>
+<h4 id="meatOptionsSuccess"></h4>
+<br>
+
+            <div class="col-lg-4 col-8">
+
+                <button type="button" id="addMeatOptiongSave" class="form-control"
+                    style="background-color:white;">Save Meat Option</button>
+
+            </div>
+           
+
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        
+    </div>
+
+</div>
+
+</div>
+
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../../../Customer/js/jquery.min.js"></script>
+    <script src="../../../Customer/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="../../assets/plugins/common/common.min.js"></script> -->
+    <!-- <script src="../js/custom.min.js"></script> -->
+    <!-- <script src="../js/settings.js"></script> -->
+    <!-- <script src="../js/quixnav.js"></script> -->
+    <!-- <script src="../js/styleSwitcher.js"></script> -->
+
+
+    
+    <script src="../../../Customer/js/firebase.db.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, addDoc, getDocs, collection, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCZGi5P1yRqYrU0Oe2_FFEObI9MGVjATvU",
+            authDomain: "clear-creek-catering-5948b.firebaseapp.com",
+            projectId: "clear-creek-catering-5948b",
+            storageBucket: "clear-creek-catering-5948b.appspot.com",
+            messagingSenderId: "1059731139056",
+            appId: "1:1059731139056:web:53a71d763e32b0e33e9535",
+            measurementId: "G-5N6VCT5ZN3"
+            };
+
+        window.collection = collection;
+        window.getDoc = getDoc;
+        window.getDocs = getDocs;
+        window.getAuth = getAuth;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+        window.updateProfile = updateProfile;
+        window.signOut = signOut;
+        window.setDoc = setDoc;
+        window.addDoc = addDoc;
+        window.updateDoc = updateDoc;
+        window.arrayUnion = arrayUnion;
+        window.arrayRemove = arrayRemove;
+        window.getStorage = getStorage;
+        window.ref= ref;
+        window.uploadBytes= uploadBytes;
+        window.getDownloadURL  = getDownloadURL ;
+
+        window.doc = doc;
+        window.firebaseApp = initializeApp(firebaseConfig);
+        window.firbasedb = getFirestore(window.firebaseApp);
+        // getUsers(window.firbasedb);
+        let token = sessionStorage.getItem('token');
+        let uname = sessionStorage.getItem("displayname");
+        if (token && uname) {
+            $('div#navLogin').css('display', 'none');
+            $('div#currentUserSection').css('display', 'block');
+            $('#currentUser').html(uname);
+        } else {
+            $('div#navLogin').css('display', 'block');
+            $('div#currentUserSection').css('display', 'none');
+        }
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#itemSuccess').hide();
+            allMeatOptions();
+            setMeatOptionDropdown();
+            setToppingsDropdown();
+            fetchMenuItems();
+            // geCustomeItemsForFood();
+            // getCartItems('adminorders', 'Orders');
+        });
+    </script>
+
+</body>
+
+
+</html>

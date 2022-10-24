@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Clear Creek Catering</title>
+
+        <!-- CSS FILES -->        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">                
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+        <link href="css/tooplate-crispy-kitchen.css" rel="stylesheet">
+        <link href="social-icon-blink bi-facebook" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+<!--
+
+Tooplate 2129 Crispy Kitchen
+
+https://www.tooplate.com/view/2129-crispy-kitchen
+
+-->
+    </head>
+    
+    <body>
+        <div id="loader"></div>
+        <nav class="navbar navbar-expand-lg bg-white shadow-lg">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <a class="navbar-brand" href="index.html">
+                    Clear Creek Catering
+                </a>
+
+                <div class="d-lg-none">
+                    <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#BookingModal">Reservation</button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+
+                        
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Menu</a>
+                        </li> -->
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="orderonline.html">Order Online</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="cart.html">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="myorder.html">My Orders</a>
+                        </li>
+
+                        <li class="nav-item" id="adminNav">
+                            <a class="nav-link " href="/admin/main/template">Admin</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link " href="contact.html">ContactUs</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="navLogin" class="">
+                    <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#BookingModalSignin">SignIn/SignUp</button>
+                </div>
+                <div id="currentUserSection"  class="">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                          </svg><span id ="currentUser"></span> 
+                      </button>
+
+                      <button id="logout" type="button" class="btn btn-default btn-sm">
+                            Logout
+                        </button>
+                </div>
+
+            </div>
+        </nav>
+
+        <main>
+
+            <header class="site-header site-contact-header">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-10 col-12 mx-auto">
+                            <h1 class="text-white">Payment Methods</h1>
+
+
+                            <input type="radio"  value="C">
+  
+                              <label for=""></label><br>
+
+                            
+                            <a class="text-white" href="Payment.html">Credit Card/Debit Card </a>
+                            <br>
+
+
+                            <input type="radio"  value="C">
+
+  
+                              <label for=""></label><br>
+
+                            <a class="text-white" href="cash.html">Cash </a>
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="overlay"></div>
+            </header>
+
+            <section class="contact section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12" id="orderSuccess">
+                            <h2 class="mb-4">Order placed successfully!</h2>
+                        </div>
+                        <div class="col-12">
+                            <h2 class="mb-4">Credit Card/Debit Card</h2>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <form class="custom-form contact-form row"   role="form">
+                                <div class="col-lg-6 col-6">
+                                    <label for="nameOnCard" class="form-labyuel">Name on the card</label>
+
+                                    <input type="text" name="nameOnCard" id="nameOnCard" class="form-control" placeholder="Full Name" required>
+                                </div>
+
+                                <div class="col-lg-6 col-6">
+                                    <label for="cardNumber" class="form-label">Card number</label>
+
+                                    <input type="telephone" name="cardNumber" id="cardNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" placeholder="123-456-7890">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="cardEmail" class="form-label">Email</label>
+
+                                    <input type="email" name="cardEmail" id="cardEmail" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Your Email" required="">
+
+                                    <label for="billAddress" class="form-label">Billing Address</label>
+
+                                    <textarea class="form-control" rows="5" id="billAddress" name="billAddress" placeholder="Billing Adress"></textarea>
+                                </div>
+
+                                <div class="col-lg-5 col-12 ms-auto">
+                                    <button type="button" id="orderProceed" class="form-control">Proceed</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-lg-4 col-12 mx-auto mt-lg-5 mt-4">
+
+                            <h5>Order Details</h5>
+
+                            <div id="orderDetails">
+                                
+                            </div>
+                               
+
+                            <h5>Subtotal</h5>
+
+                            <div class="d-flex">
+                                <p>TOTAL</p>
+
+                                <p class="ms-5" id="orderTotal"></p>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12">
+                            <h4 class="mt-5 mb-4">1605 S Main St
+                                1605 S Main St, Maryville, MO 64468</h4>
+
+                            <div class="google-map pt-3">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3041.55860899499!2d-94.87208008474506!3d40.32995257937521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87eac50a623fd6cf%3A0xa12eaca3eb8ddf21!2s1605%20S%20Main%20St%2C%20Maryville%2C%20MO%2064468!5e0!3m2!1sen!2sus!4v1654032710701!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="site-footer section-padding">
+            
+            <div class="container">
+                
+                <div class="row">
+
+                    <div class="col-12">
+                        <h4 class="text-white mb-4 me-5">Clear Creek Catering</h4>
+                    </div>
+
+                    <div class="col-lg-4 col-md-7 col-xs-12 tooplate-mt30">
+                        <h6 class="text-white mb-lg-4 mb-3">Location</h6>
+
+                        <p id="footerLocationTruck"></p>
+
+                        <a href="https://www.google.com/maps/place/Maryville,+MO+64468/@40.3494391,-94.8537999,13z/data=!3m1!4b1!4m5!3m4!1s0x87eac4e050377d9d:0x6992857ebaf03d59!8m2!3d40.3461017!4d-94.8724706?hl=en" class="custom-btn btn btn-dark mt-2">Directions</a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-5 col-xs-12 tooplate-mt30">
+                        <h6 class="text-white mb-lg-4 mb-3">Opening Hours</h6>
+
+                        <p class="mb-2"> Monday - Friday</p>
+
+                        <p>10:00 AM - 08:00 PM</p>
+
+                        <p>Tel: <a href="tel: 010-02-0340" class="tel-link">010-02-0340</a></p>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
+                        <h6 class="text-white mb-lg-4 mb-3">Social</h6>
+
+                        <ul class="social-icon">
+                            <li><a href="https://www.facebook.com/profile.php?id=100057066145905" class="social-icon-link bi-facebook"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                            <li><a href="https://twitter.com/search?q=tooplate.com&src=typed_query&f=live" target="_blank"
+                            	 class="social-icon-link bi-twitter"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+                        </ul>
+                    
+                       
+                    </div>
+
+                </div><!-- row ending -->
+                
+             </div><!-- container ending -->
+             
+        </footer>
+
+      <!-- Modal -->
+      <div class="modal fade" id="BModalSignup" tabindex="-1" aria-labelledby="BModalSignup" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="mb-0">Sign Up</h3>
+    
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+    
+                <div class="modal-body d-flex flex-column justify-content-center">
+                    <div class="booking">
+                        
+                        <form class="booking-form row" role="form" action="#" method="post">
+                            <div class="col-lg-6 col-12">
+                                <label for="fname" class="form-label">First Name</label>
+    
+                                <input type="text" name="fname" id="fname" class="form-control" placeholder="Your first name" required>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <label for="lname" class="form-label">Last Name</label>
+    
+                                <input type="text" name="lname" id="lname" class="form-control" placeholder="Your last name" required>
+                            </div>
+    
+                            <div class="col-lg-6 col-12">
+                                <label for="email" class="form-label">Email Address</label>
+    
+                                <input type="email" name="email" id="semail" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="your@email.com" required>
+                            </div>
+    
+                            <div class="col-lg-6 col-12">
+                                <label for="phone" class="form-label">Phone Number</label>
+    
+                                <input type="telephone" name="phone" id="sphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" placeholder="123-456-7890">
+                            </div>
+    
+                         
+    
+                           
+                            <div class=" col-lg-6 col-12">
+                                <label for="spassowrd" class="form-label">Password</label>
+    
+                                <input type="password" minlength="6" name="spassoword" id="spassowrd"  class="form-control">
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <label for="scpassowrd" class="form-label">Confirm Password</label>
+    
+                                <input type="password"  minlength="6" name="scpassowrd" id="scpassowrd"  class="form-control">
+                            </div>
+                            <div class="col-lg-4 col-12 ms-auto">
+                                <span id="infoMsg"></span>
+                            </div>
+                            <div class="col-lg-6 col-12 ms-auto">
+                                <button type="button" id="signup" class="form-control">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    
+                <div class="modal-footer"></div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Modal -->
+    
+    <div class="modal fade" id="BookingModalSignin" tabindex="-1" aria-labelledby="BookingModalSignin" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="mb-0">Sign In</h3>
+    
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+    
+                <div class="modal-body d-flex flex-column justify-content-center">
+                    <div class="booking">
+                        
+                       
+                            <div class="col-lg-6 col-12">
+                                <label for="email" class="form-label">User name/Email </label>
+    
+                                <input type="email" name="email" id="email" pattern="[^ @]@[^ @]" class="form-control" placeholder="your@email.com" required>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <label for="message" class="form-label">Password</label>
+    
+                                <input type="password"  minlength="6" name="password" id="password"  class="form-control" placeholder="Password" required>
+                            </div>
+                            
+                        </div>
+    
+    
+                      
+                    
+    
+    
+                        <div class="col-lg-4 col-8" style="background-color:white">
+                          
+                          <span class="psw">Forgot <a href="#">password?</a></span>
+                        </div><br>
+    
+                            <div class="space">
+                               
+    
+                            </div>
+                            
+                            
+                                
+                            <div class="col-lg-4 col-8">
+                                
+                                <button type="button" id="signIn" class="form-control" style="background-color:white;">SignIn</button>
+                                
+                                
+    
+                                
+                            </div>    
+    
+    
+                            
+                            <p class="navbar-brand" >
+                                Or
+                            </p>
+                            
+    
+                            <div class="space"></div>
+    
+                            
+                            
+                            <div class="col-lg-4 col-8">
+                                
+                                <button type="button" class="form-control" data-bs-toggle="modal" style="background-color:rgb(248, 11, 11);" data-bs-target="#BModalSignup">Register</button>
+                            </div>
+                            
+                            
+                        </form>
+                    </div>
+                </div>
+    
+              
+                <div class="modal-footer"></div>
+                
+            </div>
+            
+        </div>
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/custom.js"></script>
+
+        <script  src="js/firebase.db.js"></script>
+        <script type="module">
+                 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+                import { getFirestore, doc, getDoc, setDoc,addDoc, getDocs, collection, updateDoc,  arrayUnion, arrayRemove  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+                import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+                const firebaseConfig = {
+            apiKey: "AIzaSyCZGi5P1yRqYrU0Oe2_FFEObI9MGVjATvU",
+            authDomain: "clear-creek-catering-5948b.firebaseapp.com",
+            projectId: "clear-creek-catering-5948b",
+            storageBucket: "clear-creek-catering-5948b.appspot.com",
+            messagingSenderId: "1059731139056",
+            appId: "1:1059731139056:web:53a71d763e32b0e33e9535",
+            measurementId: "G-5N6VCT5ZN3"
+            };
+
+      window.collection = collection;
+      window.getDoc = getDoc;
+      window.getDocs = getDocs;
+      window.getAuth = getAuth;
+      window.signInWithEmailAndPassword= signInWithEmailAndPassword;
+      window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+      window.updateProfile = updateProfile;
+      window.signOut  = signOut ;
+      window.setDoc  = setDoc ;
+      window.addDoc = addDoc;
+      window.updateDoc = updateDoc;
+      window.arrayUnion =arrayUnion;
+      window.arrayRemove = arrayRemove ;
+      
+      window.doc = doc;
+        window.firebaseApp = initializeApp(firebaseConfig);
+        window.firbasedb = getFirestore(window.firebaseApp);
+        // getUsers(window.firbasedb);
+        let token = sessionStorage.getItem('token');
+         let uname = sessionStorage.getItem("displayname");
+         if(token && uname){
+            $('div#navLogin').css('display','none');
+            $('div#currentUserSection').css('display','block');
+            $('#currentUser').html(uname);
+         }else{
+            $('div#navLogin').css('display','block');
+            $('div#currentUserSection').css('display','none');
+         }
+      </script>
+       <script type="text/javascript">
+        
+        $(document).ready(function(){
+            $('#orderSuccess').hide();
+            getCartItems('orders');
+            getLoationLatLng();
+        });
+    </script>
+
+    </body>
+</html>
