@@ -155,15 +155,15 @@
 
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
-                    <div class="breadcrumb-range-picker">
+                    <div class="itemtypecrumb-range-picker">
                         <span><i class="icon-calender"></i></span>
                         
                     </div>
                 </div>
                 <!-- <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>
+                    <ol class="itemtypecrumb">
+                        <li class="itemtypecrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="itemtypecrumb-item active"><a href="javascript:void(0)">Components</a></li>
                     </ol>
                 </div> -->
             </div>
@@ -176,7 +176,7 @@
 						<p class="mb-0">Your admin</p>
 					</div>
                     <div class="col-12">
-                        <button id="addMenuItem" type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminMenuModal">Add Sandwich Wraps</button>
+                        <button id="addMenuItem" type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminMenuModal">Additem</button>
                         <button id="addToppings" type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminToppingModal">Add Toppings</button>
                         <button id="addMeatOptionsBtn" type="button" class="custom-btn btn btn-danger" >Add Meat Options</button>
                         <!-- <button id="addMenuItem" >Add Menu Item</button> -->
@@ -419,7 +419,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="mb-0">Add Sandwich Wraps</h3>
+                <h3 class="mb-0">Add item</h3>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -429,9 +429,9 @@
 
 
                     <div class="col-lg-6 col-12">
-                        <label for="sandwichwrapname" class="form-label">Sandwich wrap name </label>
+                        <label for="itemname" class="form-label">itemname </label>
 
-                        <input type="text" name="sandwichwrapname" id="sandwichwrapname" class="form-control"
+                        <input type="text" name="itemnamee" id="itemname" class="form-control"
                              required>
                     </div>
                     <br>
@@ -455,9 +455,9 @@
                     <br>
 
                     <div class="col-lg-6 col-12">
-                        <label for="bread" class="form-label">Bread</label>
+                        <label for="itemtype" class="form-label">itemtype</label>
 
-                        <input type="text" name="bread" id="bread" class="form-control"
+                        <input type="text" name="itemtype" id="itemtype" class="form-control"
                              required>
 
                             
@@ -466,9 +466,9 @@
                     <br>
 
                     <div class="col-lg-6 col-12">
-                        <label for="description" class="form-label">Description</label>
+                        <label for="itemdescription" class="form-label">itemdescription</label>
 
-                        <textarea type="text" name="description" id="description" class="form-control"
+                        <textarea type="text" name="itemdescription" id="itemdescription" class="form-control"
                              required> </textarea>
 
                             
@@ -477,9 +477,9 @@
                     <br>
 
                     <div class="col-lg-6 col-12">
-                        <label for="price" class="form-label">Price</label>
+                        <label for="itemprice" class="form-label">itemPrice</label>
 
-                        <input type="text" name="price" id="price" class="form-control"
+                        <input type="text" name="itemprice" id="itemprice" class="form-control"
                              required>
                     </div>
 
@@ -497,7 +497,9 @@
 
                     <div class="col-lg-6 col-12">
                         <input type="checkbox" id="isTodaySpecial"  name="available" >
+
                         <label for="isTodaySpecial" class="form-label">Is Today Special?</label>
+
 
                        
                         
@@ -538,6 +540,7 @@
                 <div class="col-lg-4 col-8">
 
                     <button type="button" id="addMenuItemSave" class="form-control"
+
                         style="background-color:green;">Save Menu</button>
 
                 </div>
@@ -633,8 +636,10 @@ aria-hidden="true">
 
             <div class="col-lg-4 col-8">
 
+
                 <button type="button" id="addToppingSave" class="form-control"
                     style="background-color:green;">Save Topping</button>
+
 
             </div>
            
@@ -669,8 +674,8 @@ aria-hidden="true">
                 <div class="col-lg-6">
 
                     <div class="col-lg-6 col-12">
-                        <label for="sandwichwtapname" class="form-label">Sandwich Wrap Name</label>
-                        <select name="sandwichwtapname" id="sandwichwtapname">
+                        <label for="itemname" class="form-label">Sandwich Wrap Name</label>
+                        <select name="itemname" id="itemname">
                            
                           </select>
                        
@@ -691,9 +696,9 @@ aria-hidden="true">
               
 
                 <div class="col-lg-6 col-12">
-                    <label for="mPrice" class="form-label">Price</label>
+                    <label for="meatPrice" class="form-label">Price</label>
 
-                    <input type="text" name="mPrice" id="mPrice" class="form-control"
+                    <input type="text" name="meatPrice" id="meatPrice" class="form-control"
                          required>
                 </div>
 
@@ -707,7 +712,7 @@ aria-hidden="true">
     <table id="meatOptionList" class="customers_cart" cellspacing="0">
         <thead>
             <tr>
-                <th class="product-name">Sandwich Wrap</th>
+                <th class="product-name">Add item</th>
                 <th class="product-name">Meat Options</th>
                 <th class="product-price">Price</th>
                 <th class="product-price">Action</th>
@@ -732,7 +737,9 @@ aria-hidden="true">
             <div class="col-lg-4 col-8">
 
                 <button type="button" id="addMeatOptiongSave" class="form-control"
+
                     style="background-color:green;">Save Meat Option</button>
+
 
             </div>
            
