@@ -259,6 +259,25 @@ function getCurrentUser() {
   let currentUser = sessionStorage.getItem('currentUser');
   return JSON.parse(currentUser);
 }
+window.writeReview = function(wrap){
+  $('#reviewwriteText').val('');
+  $('#wrapnameItem').html(wrap);
+  $('#reviewModal').modal('show');
+ 
+}
+
+$('#reveiwwwrite').on('click', function(){
+      let wrap = $('#wrapnameItem').html();
+      let wrapText =  $('#reviewwriteText').val();
+      let user = getCurrentUser();
+
+      showLoader();
+      fetch(firebaseAPI + 'writeReview?email=' + user.email + '&wrap=' + wrap + '&writereview=' + wrapText).then(response => response.text()).then(data => {
+        $('#reviewwriteText').val("")
+        hideLoader();
+        alert("Your review submitted!");
+      });
+});
 
 function renderCart(docData, page) {
   let trows = '';
