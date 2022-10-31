@@ -1694,6 +1694,26 @@ function renderFullcalendar(events){
   // var event = calendar.getEventById('a') // an event object!
   // var start = event.start // a property (a Date object)
   // console.log(start.toISOString()) // "2018-09-01T00:00:00.000Z"
+  function forgotPassword(){
+    let email = prompt("Please enter your email", "");
+    if(email !=null){
+  
+      const auth = getAuth();
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          alert("Password reset email sent!");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if(error && error.code == 'auth/user-not-found'){
+            alert("Please enter valid email address!")
+  
+          }
+          // ..
+        });
+    }
+  }
 }
 
 
