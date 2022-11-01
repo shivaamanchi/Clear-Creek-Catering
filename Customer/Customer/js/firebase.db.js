@@ -78,6 +78,24 @@ function pageReload() {
     window.location.reload();
   }
 }
+window.writeReview = function(wrap){
+  $('#reviewwriteText').val('');
+  $('#wrapnameItem').html(wrap);
+  $('#reviewModal').modal('show');
+ 
+}
+$('#reveiwwwrite').on('click', function(){
+      let wrap = $('#wrapnameItem').html();
+      let wrapText =  $('#reviewwriteText').val();
+      let user = getCurrentUser();
+
+      showLoader();
+      fetch(firebaseAPI + 'writeReview?email=' + user.email + '&wrap=' + wrap + '&writereview=' + wrapText).then(response => response.text()).then(data => {
+        $('#reviewwriteText').val("")
+        hideLoader();
+        alert("Your review submitted!");
+      });
+});
 $('#signIn').on('click', function () {
   showLoader();
   const auth = getAuth(firebaseApp);
@@ -346,6 +364,7 @@ function renderCart(docData, page) {
     if (!page) {
       trows += `<td><button  id="delete${index}">Delete</button></td></tr>`;
     }
+    trows += `<td> <span class="write-review" onclick="writeReview('${row.name}')"> Write Review </span> </td></tr>`
     totalPrice += (+row.quantity) * (row.basePrice + totalPriceWithToping);
     return row;
   });
