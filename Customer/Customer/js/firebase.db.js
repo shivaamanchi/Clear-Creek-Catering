@@ -78,6 +78,12 @@ function pageReload() {
     window.location.reload();
   }
 }
+window.writeReview = function(wrap){
+  $('#reviewwriteText').val('');
+  $('#wrapnameItem').html(wrap);
+  $('#reviewModal').modal('show');
+ 
+}
 $('#signIn').on('click', function () {
   showLoader();
   const auth = getAuth(firebaseApp);
