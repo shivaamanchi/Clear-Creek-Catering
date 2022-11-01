@@ -345,6 +345,7 @@ function renderCart(docData, page) {
     if (!page) {
       trows += `<td><button  id="delete${index}">Delete</button></td></tr>`;
     }
+    trows += `<td> <span class="write-review" onclick="writeReview('${row.name}')"> Write Review </span> </td></tr>`
     totalPrice += (+row.quantity) * (row.basePrice + totalPriceWithToping);
     return row;
   });
