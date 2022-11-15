@@ -277,6 +277,25 @@ function getCurrentUser() {
   let currentUser = sessionStorage.getItem('currentUser');
   return JSON.parse(currentUser);
 }
+window.writeReview = function(wrap){
+  $('#reviewwriteText').val('');
+  $('#wrapnameItem').html(wrap);
+  $('#reviewModal').modal('show');
+ 
+}
+
+$('#reveiwwwrite').on('click', function(){
+      let wrap = $('#wrapnameItem').html();
+      let wrapText =  $('#reviewwriteText').val();
+      let user = getCurrentUser();
+
+      showLoader();
+      fetch(firebaseAPI + 'writeReview?email=' + user.email + '&wrap=' + wrap + '&writereview=' + wrapText).then(response => response.text()).then(data => {
+        $('#reviewwriteText').val("")
+        hideLoader();
+        alert("Your review submitted!");
+      });
+});
 
 function renderCart(docData, page) {
   let trows = '';
@@ -1694,6 +1713,26 @@ function renderFullcalendar(events){
   // var event = calendar.getEventById('a') // an event object!
   // var start = event.start // a property (a Date object)
   // console.log(start.toISOString()) // "2018-09-01T00:00:00.000Z"
+  function forgotPassword(){
+    let email = prompt("Please enter your email", "");
+    if(email !=null){
+  
+      const auth = getAuth();
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          alert("Password reset email sent!");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if(error && error.code == 'auth/user-not-found'){
+            alert("Please enter valid email address!")
+  
+          }
+          // ..
+        });
+    }
+  }
 }
 
 
