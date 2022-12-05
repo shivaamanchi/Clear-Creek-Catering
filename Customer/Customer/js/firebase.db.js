@@ -6,7 +6,7 @@
 
 // TODO: Replace the following with your app's Firebase project configuration
 
-var firebaseAPI = 'http://localhost:8080/';
+var firebaseAPI = 'http://159.223.100.199:8083/';
 
 var selectedTopings = [];
 var selectedMeats = [];
