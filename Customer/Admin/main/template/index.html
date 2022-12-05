@@ -18,6 +18,22 @@
     <!-- Chartist -->
     <link rel="stylesheet" href="../../assets/plugins/chartist/css/chartist.min.css">
     <link href="../css/style.css" rel="stylesheet">
+    <!-- <link href="../../../Customer/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link href="../../../Customer/css/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: .25em .25em;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    border: 0;
+    border-radius: .25rem;
+    opacity: .5
+}
+    </style>
 
 </head>
 
@@ -35,32 +51,37 @@
                 Clear Creek Catering
             </a>
 
+
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
-                    </li>               
+                    </li>
+
+                   
+
                     <li class="nav-item">
-                        <a class="nav-link" href="orderonline.html">Order Online</a>
+                        <a class="nav-link" href="../../../Customer/orderonline.html">Order Online</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="cart.html">Cart</a>
+                        <a class="nav-link active" href="../../../Customer/cart.html">Cart</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="myorder.html">My Orders</a>
+                        <a class="nav-link active" href="../../../Customer/myorder.html">My Orders</a>
                     </li>
                     <li class="nav-item" id="adminNav">
                         <a class="nav-link " href="/admin/main/template">Admin</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
-                    </li>
 
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../../Customer/contact.html">Contact Us</a>
+                    </li>
                     <div id="navLogin" class="">
                         <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#BookingModalSignin">SignIn/SignUp</button>
                     </div>
-
                     <div id="currentUserSection" class="">
                         <button type="button" class="btn btn-default btn-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -74,8 +95,12 @@
                             Logout
                         </button>
                     </div>
+
+
                 </ul>
             </div>
+
+
         </div>
     </nav>
     
@@ -122,6 +147,11 @@
                             
                         </ul>
                     </li>
+                    
+                    
+                        
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -148,8 +178,11 @@
             <div class="container-fluid">
                 <div class="row justify-content-between mb-4">
 					<div class="col-xl-3 col-lg-4">
-						<h2 class="page-heading">Hi,Welcome Back!</h2>						
-                    </div>                        
+						<h2 class="page-heading">Hi,Welcome Back!</h2>
+						
+                    </div>
+                    
+    
                 </div>
                 <div class="row">
                     <div class="col-xl-6 col-xxl-12">
@@ -159,15 +192,15 @@
                                     <div class="card-body pb-0">
                                         <div class="row justify-content-between">
                                             <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Order</h4>
+                                                <h4 class="text-muted mb-3">Total Revenue</h4>
                                             </div>
                                             <div class="col-auto">
-                                                <h2>2,250</h2>
+                                                <h2 id="lastWeekRevenue">2,250</h2>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> 6.365% </span>
-                                            <p> Since last month</p>
+                                            <!-- <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> 6.365% </span> -->
+                                            <p> Since last week</p>
                                         </div>
                                     </div>
                                     <div class="chart-wrapper">
@@ -180,15 +213,15 @@
                                     <div class="card-body pb-0">
                                         <div class="row justify-content-between">
                                             <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Pending</h4>
+                                                <h4 class="text-muted mb-3">Meat Revenue</h4>
                                             </div>
                                             <div class="col-auto">
-                                                <h2>2,250</h2>
+                                                <h2 id="lastWeekMeatRevenue">2,250</h2>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-danger"><i class="mdi mdi-arrow-down-bold"></i> 2.65% </span>
-                                            <p> Since last month</p>
+                                            <!-- <span class="text-danger"><i class="mdi mdi-arrow-down-bold"></i> 2.65% </span> -->
+                                            <p> Since last week</p>
                                         </div>
                                     </div>
                                     <div class="chart-wrapper">
@@ -201,15 +234,19 @@
                                     <div class="card-body pb-0">
                                         <div class="row justify-content-between">
                                             <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Revenue</h4>
+                                                <h4 class="text-muted mb-3">Monthly Revenue</h4>
                                             </div>
                                             <div class="col-auto">
-                                                <h2>$2,250</h2>
+                                                <h2 id="monthRevenue">$0</h2>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-danger"><i class="mdi mdi-arrow-down-bold"></i> 23.65% </span>
-                                            <p> Since last month</p>
+                                            <select name="revenueYear" id="revenuYear">
+
+                                            </select>
+                                           <select name="months" id="monthOptions">
+
+                                           </select>
                                         </div>
                                     </div>
                                     <div class="chart-wrapper">
@@ -222,15 +259,19 @@
                                     <div class="card-body pb-0">
                                         <div class="row justify-content-between">
                                             <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Expense</h4>
+                                                <h4 class="text-muted mb-3">Monthly Meat Revenue</h4>
                                             </div>
                                             <div class="col-auto">
-                                                <h2>$ 1,475</h2>
+                                                <h2 id="monthsMeatRevenue">$0</h2>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> 47.5% </span>
-                                            <p> Since last month</p>
+                                            <select name="revenueMeatYear" id="revenueMeatYear">
+
+                                            </select>
+                                           <select name="monthsMeat" id="monthMeatOptions">
+
+                                           </select>
                                         </div>
                                     </div>
                                     <div class="chart-wrapper">
@@ -258,6 +299,7 @@
                                             <button id="itemwiseOrders" onclick="calnederOrder('itemwise')" type="button" class="custom-btn btn btn-danger"  >Itemwise Orders</button>
 
                                             <button id="meatOrders" onclick="calnederOrder('meatorders')" type="button" class="custom-btn btn btn-danger" >Meat Orders</button>
+                                            <!-- <button id="addMenuItem" >Add Menu Item</button> -->
                                         </div>
                                     </div>
                            
@@ -267,7 +309,72 @@
                             </div>
                         </div>
                     </div>
-                
+                    
+                    <!-- <div class="col-xl-6 col-xxl-12">
+                        <div class="card">
+                            
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Orders</h4>
+                            <div>
+                                <label>Year</label>
+                                <select id="yearSelection">
+                                    <option></option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                </select>
+                                <br>
+                                OR
+                                <br>
+                                <label>From</label>
+
+                                <input type="date" name="startDate" />
+                                 -
+                                <label>To</label>
+
+                                <input type="date" name="endDate" />
+                            </div>
+                                   
+                                <canvas id="earnings_bar_chart"></canvas>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+                        
+                    <!-- <div class="col-xl-6 col-xxl-12">
+                        <div class="card">
+                            
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Meat Orders</h4>
+                            <div>
+                                <label>Year</label>
+                                <select id="yearMeatSelection">
+                                    <option></option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                </select>
+                                <br>
+                                OR
+                                <br>
+                                <label>From</label>
+
+                                <input type="date" name="startDate" />
+                                 -
+                                <label>To</label>
+
+                                <input type="date" name="endDate" />
+                            </div>
+                                   
+                                <canvas id="meat_orders"></canvas>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    
+                    
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="top_menu_carousel owl-carousel" id="top_menu_carousel">
@@ -467,7 +574,7 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Restaurant Rating</h4>
+                                    <h4 class="card-title">Restaurent Rating</h4>
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs justify-content-end">
                                         <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#success1">Graph</a></li>
@@ -487,7 +594,7 @@
                                                         </div>
                                                         <div class="progress mt-2" style="height: 9px;">
                                                             <div class="progress-bar bg-primary" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>
+                                                        </div>                
                                                     </div>
                                                     <div class="mt-4">
                                                         <div class="d-flex justify-content-between">
@@ -496,7 +603,7 @@
                                                         </div>
                                                         <div class="progress mt-2" style="height: 9px;">
                                                             <div class="progress-bar bg-info" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>
+                                                        </div>                
                                                     </div>
                                                     <div class="mt-4">
                                                         <div class="d-flex justify-content-between">
@@ -505,7 +612,7 @@
                                                         </div>
                                                         <div class="progress mt-2" style="height: 9px;">
                                                             <div class="progress-bar bg-success" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>
+                                                        </div>                
                                                     </div>
                                                     <div class="mt-4">
                                                         <div class="d-flex justify-content-between">
@@ -514,7 +621,7 @@
                                                         </div>
                                                         <div class="progress mt-2" style="height: 9px;">
                                                             <div class="progress-bar bg-dark" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>
+                                                        </div>                
                                                     </div>
                                                 </div>
                                             </div>
@@ -601,211 +708,187 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--
-                                        <div class="col-md-12">
-                                            <div class="media mt-4">
-                                                <img src="../../assets/images/avatar/2.jpg" width="35" alt="reviewer">
-                                                <div class="media-body ml-4">
-                                                    <div class="d-flex justify-content-between">
-                                                        <strong>Antony Jonus</strong>
-                                                        <div class="vertical-card__menu--rating c-pointer">
-                                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                                            <span class="icon"><i class="fa fa-star-o"></i></span>
-                                                        </div>
-                                                    </div>
-                                                    <p>
-                                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
-                                                    </p>
-                                                </div>
                                             </div>
-    -->
-                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Visit Hour</h4>
+                                <div class="row mb-3 mt-4">
+                                    <div class="col text-center">
+                                        <p class="mb-2 text-dark">Day</p>
+                                        <h4><span class="text-success mdi mdi-arrow-up-bold"></span> 82.24 %</h4>
+                                    </div>
+                                    <div class="col text-center">
+                                        <p class="mb-2 text-dark">Night</p>
+                                        <h4><span class="text-danger mdi mdi-arrow-down-bold"></span> 12.24 %</h4>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <canvas id="visitor_graph"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="row">
 
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Visit Hour</h4>
-                    <div class="row mb-3 mt-4">
-                        <div class="col text-center">
-                            <p class="mb-2 text-dark">Day</p>
-                            <h4><span class="text-success mdi mdi-arrow-up-bold"></span> 82.24 %</h4>
-                        </div>
-                        <div class="col text-center">
-                            <p class="mb-2 text-dark">Night</p>
-                            <h4><span class="text-danger mdi mdi-arrow-down-bold"></span> 12.24 %</h4>
-                        </div>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="visitor_graph"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-    <div class="row">
-
-        <div class="col-xl-4 col-lg-5 col-xxl-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Timeline</h4>
-                    <div id="timeline-activity">
-                        <ul class="timeline mb-0">
-                            <li>
-                                <div class="timeline-badge bg-primary"></div>
-                                <a href="#" class="timeline-panel">
-                                    <span>10 minutes ago</span>
-                                    <h5 class="mt-2">New Order received</h5>
-                                </a>
-                            </li>
-
-                            <li>
-                                <div class="timeline-badge bg-success"></div>
-                                <a href="#" class="timeline-panel">
-                                    <span>25 minutes ago</span>
-                                    <h5 class="mt-2">5 Orders Delivered</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge bg-warning"></div>
-                                <a href="#" class="timeline-panel">
-                                    <span>30 minutes ago</span>
-                                    <h5 class="mt-2">3 New Tickets</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge bg-danger"></div>
-                                <a href="#" class="timeline-panel">
-                                    <span>15 minutes ago</span>
-                                    <h5 class="mt-2">8 New Reviews</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="timeline-badge bg-pink"></div>
-                                <a href="#" class="timeline-panel">
-                                    <span>15 minutes ago</span>
-                                    <h5 class="mt-2">50 New Facebook likes</h5>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-                                <div id="world-datamap"></div>
-
-
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xl-4 col-lg-6 col-xxl-6">
-            <div class="card top_menu_widget">
-                <div class="card-body">
-                    <h4 class="card-title">Top Menus</h4>
-                    <div class="media border-bottom pt-3 pb-3">
-                        <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/fishDish.jpeg">
-                        <div class="media-body">
-                            <h5 class="mb-1 mt-sm-1 mt-0">Fish Sandwich</h5>
-                            <span>EggFish, Sandwich</span>
-                        </div>
-                        <h5 class="badge-lighten-primary">$12</h5>
-                    </div>
-                    <div class="media border-bottom pt-3 pb-3">
-                        <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/shrimpless.jpeg">
-                        <div class="media-body">
-                            <h5 class="mb-1 mt-sm-1 mt-0">Shrimpless Jambalaya</h5>
-                            <span>Rice</span>
-                        </div>
-                        <h5 class="badge-lighten-success">$33</h5>
-                    </div>
-                    <div class="media border-bottom pt-3 pb-3">
-                        <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/cheesecake.jpeg">
-                        <div class="media-body">
-                            <h5 class="mb-1 mt-sm-1 mt-0">No Bake Frozen Cheesecake</h5>
-                            <span>Cheesecake</span>
-                        </div>
-                        <h5 class="badge-lighten-info">$8</h5>
-                    </div>
-                    <div class="media border-bottom pt-3 pb-3">
-                        <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/omlette.jpeg">
-                        <div class="media-body">
-                            <h5 class="mb-1 mt-sm-1 mt-0">Hot Omlette with Bacon</h5>
-                            <span>Egg, Bacon</span>
-                        </div>
-                        <h5 class="badge-lighten-warning">$6</h5>
-                    </div>
-                    <div class="media border-bottom pt-3 pb-3">
-                        <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/mashed.jpeg">
-                        <div class="media-body">
-                            <h5 class="mb-1 mt-sm-1 mt-0">Mashed tators combo</h5>
-                            <span>Juice, Cold</span>
-                        </div>
-                        <h5 class="badge-lighten-danger">$32</h5>
-                    </div>
-                    <div class="media pt-3 pb-3">
-                        <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/shrimp.jpeg">
-                        <div class="media-body">
-                            <h5 class="mb-1 mt-sm-1 mt-0">Special Spicy Shrimp</h5>
-                            <span>Hot, Spicy</span>
-                        </div>
-                        <h5 class="badge-lighten-primary">$55</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-xxl-6">
-            <div class="card">
-                <div class="card-body px-0">
-                    <h4 class="card-title px-4 mb-3">Todo</h4>
-                    <div class="todo-list">
-                        <div class="tdl-holder">
-                            <div class="tdl-content">
-                                <ul id="todo_list">
-                                    <li><label><input type="checkbox"><i></i><span>Decorate kitchen room</span><a href='#' class="ti-trash"></a></label></li>
-                                    <li><label><input type="checkbox" checked><i></i><span>Deliver Pizza</span><a href='#' class="ti-trash"></a></label></li>
-                                    <li><label><input type="checkbox"><i></i><span>Meeting with McDonalds</span><a href='#' class="ti-trash"></a></label></li>
-                                    <li><label><input type="checkbox" checked><i></i><span>New Branch Opening</span><a href='#' class="ti-trash"></a></label></li>
-                                    <li><label><input type="checkbox"><i></i><span>New feature launching</span><a href='#' class="ti-trash"></a></label></li>
-                                    <li><label><input type="checkbox" checked><i></i><span>Meeting with KFC</span><a href='#' class="ti-trash"></a></label></li>
-                                </ul>
-                            </div>
-                            <div class="px-4">
-                                <input type="text" class="tdl-new form-control" placeholder="Write new item and hit 'Enter'...">
+                    <div class="col-xl-4 col-lg-5 col-xxl-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Timeline</h4>
+                                <div id="timeline-activity">
+                                    <ul class="timeline mb-0">
+                                        <li>
+                                            <div class="timeline-badge bg-primary"></div>
+                                            <a href="#" class="timeline-panel">
+                                                <span>10 minutes ago</span>
+                                                <h5 class="mt-2">New Order received</h5>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-badge bg-success"></div>
+                                            <a href="#" class="timeline-panel">
+                                                <span>20 minutes ago</span>
+                                                <h5 class="mt-2">5 Orders Delivered</h5>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-badge bg-warning"></div>
+                                            <a href="#" class="timeline-panel">
+                                                <span>30 minutes ago</span>
+                                                <h5 class="mt-2">3 New Tickets</h5>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-badge bg-danger"></div>
+                                            <a href="#" class="timeline-panel">
+                                                <span>15 minutes ago</span>
+                                                <h5 class="mt-2">8 New Reviews</h5>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-badge bg-pink"></div>
+                                            <a href="#" class="timeline-panel">
+                                                <span>15 minutes ago</span>
+                                                <h5 class="mt-2">50 New Facebook likes</h5>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
+                   
+                                        
+                                            <div id="world-datamap"></div>                                    
+                                        
+                                    
+                       
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-xl-4 col-xxl-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Ticket</h4>
-                    <div id="ticket">
-                        <div class="media border-bottom pt-3 pb-3">
-                            <strong>#45458</strong>
-                            <div class="media-body ml-3">
-                                <a href="#">
-                                    <h5 class="text-danger">Slow Delivery</h5>
-                                    <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                </a>
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-xxl-6">
+                        <div class="card top_menu_widget">
+                            <div class="card-body">
+                                <h4 class="card-title">Top Menus</h4>
+                                <div class="media border-bottom pt-3 pb-3">
+                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/fishDish.jpeg">
+                                    <div class="media-body">
+                                        <h5 class="mb-1 mt-sm-1 mt-0">Fish Sandwich</h5>
+                                        <span>EgFish, Sandwich</span>
+                                    </div>
+                                    <h5 class="badge-lighten-primary">$12</h5>
+                                </div>
+                                <div class="media border-bottom pt-3 pb-3">
+                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/shrimpless.jpeg">
+                                    <div class="media-body">
+                                        <h5 class="mb-1 mt-sm-1 mt-0">Shrimpless Jambalaya</h5>
+                                        <span>Rice</span>
+                                    </div>
+                                    <h5 class="badge-lighten-success">$33</h5>
+                                </div>
+                                <div class="media border-bottom pt-3 pb-3">
+                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/cheesecake.jpeg">
+                                    <div class="media-body">
+                                        <h5 class="mb-1 mt-sm-1 mt-0">No Bake Frozen Cheesecake</h5>
+                                        <span>Cheesecake</span>
+                                    </div>
+                                    <h5 class="badge-lighten-info">$8</h5>
+                                </div>
+                                <div class="media border-bottom pt-3 pb-3">
+                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/omlette.jpeg">
+                                    <div class="media-body">
+                                        <h5 class="mb-1 mt-sm-1 mt-0">Hot Omlette with Bacon</h5>
+                                        <span>Egg, Bacon</span>
+                                    </div>
+                                    <h5 class="badge-lighten-warning">$6</h5>
+                                </div>
+                                <div class="media border-bottom pt-3 pb-3">
+                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/mashed.jpeg">
+                                    <div class="media-body">
+                                        <h5 class="mb-1 mt-sm-1 mt-0">Mashed tators combo</h5>
+                                        <span>Juice, Cold</span>
+                                    </div>
+                                    <h5 class="badge-lighten-danger">$32</h5>
+                                </div>
+                                <div class="media pt-3 pb-3">
+                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/shrimp.jpeg">
+                                    <div class="media-body">
+                                        <h5 class="mb-1 mt-sm-1 mt-0">Special Spicy Shrimp</h5>
+                                        <span>Hot, Spicy</span>
+                                    </div>
+                                    <h5 class="badge-lighten-primary">$55</h5>
+                                </div>
                             </div>
-                            <!-- <span class="badge badge-warning">Pending</span> -->
-                                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-xxl-6">
+                        <div class="card">
+                            <div class="card-body px-0">
+                                <h4 class="card-title px-4 mb-3">Todo</h4>
+                                <div class="todo-list">
+                                    <div class="tdl-holder">
+                                        <div class="tdl-content">
+                                            <ul id="todo_list">
+                                                <li><label><input type="checkbox"><i></i><span>Decorate kitchen room</span><a href='#' class="ti-trash"></a></label></li>
+                                                <li><label><input type="checkbox" checked><i></i><span>Deliver Pizza</span><a href='#' class="ti-trash"></a></label></li>
+                                                <li><label><input type="checkbox"><i></i><span>Meeting with McDonalds</span><a href='#' class="ti-trash"></a></label></li>
+                                                <li><label><input type="checkbox" checked><i></i><span>New Branch Opening</span><a href='#' class="ti-trash"></a></label></li>
+                                                <li><label><input type="checkbox"><i></i><span>New feature launching</span><a href='#' class="ti-trash"></a></label></li>
+                                                <li><label><input type="checkbox" checked><i></i><span>Meeting with KFC</span><a href='#' class="ti-trash"></a></label></li>
+                                            </ul>
+                                        </div>
+                                        <div class="px-4">
+                                            <input type="text" class="tdl-new form-control" placeholder="Write new item and hit 'Enter'...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-xl-4 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Ticket</h4>
+                                <div id="ticket">
+                                    <div class="media border-bottom pt-3 pb-3">
+                                        <strong>#45458</strong>
+                                        <div class="media-body ml-3">
+                                            <a href="#">
+                                                <h5 class="text-danger">Delivery dealyed</h5>
+                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
+                                            </a>
+                                        </div>
+                                        <!-- <span class="badge badge-warning">Pending</span> -->
+                                    </div>
                                     <div class="media border-bottom pt-3 pb-3">
                                         <strong>#45458</strong>
                                         <div class="media-body ml-3">
@@ -870,7 +953,7 @@
                                         <strong>#45458</strong>
                                         <div class="media-body ml-3">
                                             <a href="#">
-                                                <h5 class="text-info">My order cancelled</h5>
+                                                <h5 class="text-info">My order cencelled</h5>
                                                 <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
                                             </a>
                                         </div>
@@ -1031,33 +1114,6 @@
                             </span>
                         </div>
                     </div>
-                    <!-- <div class="col-xl-6 col-xxl-12">
-                         <div class="card">
-
-                    <div class="card-body">
-                    <h4 class="card-title mb-4">Orders</h4>
-                        <div>
-                            <label>Year</label>
-                        <select id="yearSelection">
-                    <option></option>
-                    <option>2020</option>
-                    <option>2021</option>
-                    <option>2022</option>
-                </select>
-                <br>
-                OR
-                <br>
-                <label>From</label>
-                <input type="date" name="startDate" />
-                 -
-                <label>To</label>
-                <input type="date" name="endDate" />
-            </div>
-
-                <canvas id="earnings_bar_chart"></canvas>
-            </div>
-        </div>
-    </div> -->
                     <div>
                         <p>Header</p>
                         <div>
@@ -1147,9 +1203,9 @@
                                 <label for="sidebar_bg_10"></label>
                             </span>
                             <!-- <span>
-                <input type="radio" name="sidebar_bg" value="color_11" class="filled-in chk-col-primary" id="sidebar_bg_11">
-                <label for="sidebar_bg_11"></label>
-            </span> -->
+                                <input type="radio" name="sidebar_bg" value="color_11" class="filled-in chk-col-primary" id="sidebar_bg_11">
+                                <label for="sidebar_bg_11"></label>
+                            </span> -->
                             <span>
                                 <input type="radio" name="sidebar_bg" value="color_12" class="filled-in chk-col-primary" id="sidebar_bg_12">
                                 <label for="sidebar_bg_12"></label>
@@ -1171,10 +1227,168 @@
                 </div>
             </div>
         </div>
+
+
         <!--**********************************
             Right sidebar end
         ***********************************-->
     </div>
+       <!-- Modal -->
+       <div class="modal fade" id="BModalSignup" tabindex="-1" aria-labelledby="BModalSignup" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="mb-0">Sign Up</h3>
+    
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+    
+                <div class="modal-body d-flex flex-column justify-content-center">
+                    <div class="booking">
+                        
+                        <form class="booking-form row" role="form" action="#" method="post">
+                            <div class="col-lg-6 col-12">
+                                <label for="fname" class="form-label">First Name</label>
+    
+                                <input type="text" name="fname" id="fname" class="form-control" placeholder="Your first name" required>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <label for="lname" class="form-label">Last Name</label>
+    
+                                <input type="text" name="lname" id="lname" class="form-control" placeholder="Your last name" required>
+                            </div>
+    
+                            <div class="col-lg-6 col-12">
+                                <label for="email" class="form-label">Email Address</label>
+    
+                                <input type="email" name="email" id="semail" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="your@email.com" required>
+                            </div>
+    
+                            <div class="col-lg-6 col-12">
+                                <label for="phone" class="form-label">Phone Number</label>
+    
+                                <input type="telephone" name="phone" id="sphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" placeholder="123-456-7890">
+                            </div>
+    
+                         
+    
+                           
+                            <div class=" col-lg-6 col-12" id="dlgPwd">
+                                <label for="spassowrd" class="form-label">Password</label>
+    
+                                <input type="password" minlength="6" name="spassoword" id="spassowrd"  class="form-control">
+                            </div>
+                            <div class="col-lg-6 col-12" id="dlgConfirmPwd">
+                                <label for="scpassowrd" class="form-label">Confirm Password</label>
+    
+                                <input type="password"  minlength="6" name="scpassowrd" id="scpassowrd"  class="form-control">
+                            </div>
+                            <div class="col-lg-6 col-12 ms-auto">
+                                <span id="infoMsg"></span>
+                            </div>
+                            <div class="col-lg-6 col-12 ms-auto" id="dlgregister">
+                                <button type="button" id="signup" class="form-control">Register</button>
+                            </div>
+                            <br>
+                            <div class="col-lg-6 col-12 ms-auto" style="    margin-top: 10px;" id="dlgUpdate">
+                                <button type="button" id="dlgUpdateBtn" class="form-control">Update</button>
+                                <div id="changePassowrdLnk">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    
+                <div class="modal-footer"></div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Modal -->
+    
+    <div class="modal fade" id="BookingModalSignin" tabindex="-1" aria-labelledby="BookingModalSignin" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="mb-0">Sign In</h3>
+    
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+    
+                <div class="modal-body d-flex flex-column justify-content-center">
+                    <div class="booking">
+                        
+                       
+                            <div class="col-lg-6 col-12">
+                                <label for="email" class="form-label">User name/Email </label>
+    
+                                <input type="email" name="email" id="email" pattern="[^ @]@[^ @]" class="form-control" placeholder="your@email.com" required>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <label for="message" class="form-label">Password</label>
+    
+                                <input type="password"  minlength="6" name="password" id="password"  class="form-control" placeholder="Password" required>
+                            </div>
+                            
+                        </div>
+    
+    
+                      
+                    
+    
+    
+                        <div class="col-lg-4 col-8" style="background-color:white">
+                          
+                          <span class="psw">Forgot <a href="#" onclick="forgotPassword()">password?</a></span>
+                        </div><br>
+    
+                            <div class="space">
+                               
+    
+                            </div>
+                            
+                            
+                                
+                            <div class="col-lg-4 col-8">
+                                
+                                <button type="button" id="signIn" class="form-control" style="background-color:white;">SignIn</button>
+                                
+                                
+    
+                                
+                            </div>    
+    
+    
+                            
+                            <p class="navbar-brand" >
+                                Or
+                            </p>
+                            
+    
+                            <div class="space"></div>
+    
+                            
+                            
+                            <div class="col-lg-4 col-8">
+                                
+                                <button type="button" class="form-control" data-bs-toggle="modal" style="background-color:rgb(248, 11, 11);" data-bs-target="#BModalSignup">Register</button>
+                            </div>
+                            
+                            
+                        </form>
+                    </div>
+                </div>
+    
+              
+                <div class="modal-footer"></div>
+                
+            </div>
+            
+        </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
@@ -1212,15 +1426,16 @@
     <script src="../../assets/plugins/chartist/js/chartist.min.js"></script>
     <script src="../../assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 
-
+    <script src="../../../Customer/js/jquery.min.js"></script>
+    <script src="../../../Customer/js/bootstrap.bundle.min.js"></script>
     <!-- Init files -->
     <!-- <script src="../js/plugins-init/fullcalendar-init.js"></script> -->
     <!-- <script src="../js/dashboard/dashboard-1.js?test=9202"></script> -->
     <script src="../../../Customer/js/firebase.db.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, addDoc, getDocs, collection, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, addDoc, getDocs, collection, updateDoc, arrayUnion, arrayRemove, query, where, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
         const firebaseConfig = {
             apiKey: "AIzaSyCZGi5P1yRqYrU0Oe2_FFEObI9MGVjATvU",
             authDomain: "clear-creek-catering-5948b.firebaseapp.com",
@@ -1232,6 +1447,9 @@
             };
 
         window.collection = collection;
+        window.query = query;
+  window.where = where;
+  window.onSnapshot = onSnapshot;
         window.getDoc = getDoc;
         window.getDocs = getDocs;
         window.getAuth = getAuth;
@@ -1244,6 +1462,7 @@
         window.updateDoc = updateDoc;
         window.arrayUnion = arrayUnion;
         window.arrayRemove = arrayRemove;
+        window.sendPasswordResetEmail = sendPasswordResetEmail;
 
         window.doc = doc;
         window.firebaseApp = initializeApp(firebaseConfig);
@@ -1269,6 +1488,7 @@
 
                 getCartItems('adminorders', 'Orders');
                 listOfAdminOrders();
+                monitorOrders();
                 // renderFullcalendar();
             // }, 500);
         });

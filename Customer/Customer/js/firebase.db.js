@@ -63,7 +63,7 @@ function clearSignForm() {
 
 $('#loader').hide();
 let dpName = sessionStorage.getItem("displayname");
-if (dpName == 'admin') {
+if (dpName && dpName.trim() == 'admin') {
   $('#adminNav').css('display', 'block');
 } else {
   if (location.href.indexOf('admin') >= 0) {
@@ -78,40 +78,34 @@ function pageReload() {
     window.location.reload();
   }
 }
-window.writeReview = function(wrap){
-  $('#reviewwriteText').val('');
-  $('#wrapnameItem').html(wrap);
-  $('#reviewModal').modal('show');
- 
-}
-$('#reveiwwwrite').on('click', function(){
-      let wrap = $('#wrapnameItem').html();
-      let wrapText =  $('#reviewwriteText').val();
-      let user = getCurrentUser();
-
-      showLoader();
-      fetch(firebaseAPI + 'writeReview?email=' + user.email + '&wrap=' + wrap + '&writereview=' + wrapText).then(response => response.text()).then(data => {
-        $('#reviewwriteText').val("")
-        hideLoader();
-        alert("Your review submitted!");
-      });
-});
-$('#signIn').on('click', function () {
-  showLoader();
+function signin(email, pwd){
   const auth = getAuth(firebaseApp);
-  signInWithEmailAndPassword(auth, $('#email').val(), $('#password').val())
-    .then((userCredential) => {
-      // Signed in 
+  signInWithEmailAndPassword(auth, email, pwd)
+    .then(async (userCredential) => {
       const user = userCredential.user;
+
+      let userDetails  = await getDoc(doc(firbasedb, "USERS", user.uid));
+
+      let udata = userDetails.data();
+      // Signed in 
       sessionStorage.setItem('token', user.accessToken);
-      sessionStorage.setItem("displayname", user.displayName);
+    let dpName ='';
+      if(udata.fname){
+        dpName = udata.fname;
+      }
+
+      if(udata.lname){
+        dpName = dpName + ' ' +udata.lname;
+      }
+      sessionStorage.setItem("displayname", dpName);
       sessionStorage.setItem('currentUser', JSON.stringify(auth.currentUser))
-      if (user.accessToken && user.displayName) {
+      if (user.accessToken && dpName) {
         $('div#navLogin').css('display', 'none');
         $('div#currentUserSection').css('display', 'block');
-        $('#currentUser').html(user.displayName);
+        $('#currentUser').html(dpName);
+       
       }
-      if (user.displayName == 'admin') {
+      if ((dpName).trim() == 'admin') {
         $('#adminNav').css('display', 'block');
       }
       clearSignForm();
@@ -127,10 +121,18 @@ $('#signIn').on('click', function () {
       hideLoader();
       if (error.code == 'auth/user-not-found') {
         console.log("User not found");
+        alert('User not found please signup !');
+        return;
       }
+      alert('Something wrong with user login please try again !');
       const errorCode = error.code;
       const errorMessage = error.message;
     });
+}
+$('#signIn').on('click', function () {
+  showLoader();
+  const auth = getAuth(firebaseApp);
+  signin($('#email').val(), $('#password').val());
 });
 
 function clearSignupForm() {
@@ -185,10 +187,11 @@ $('#signup').on('click', function () {
         $('#infoMsg').html("User created successfully! Please login");
         clearSignupForm();
 
-
+        signin(semail, spassowrd);
         // ...
       }).catch((error) => {
         hideLoader();
+        alert('Something wrong with user registration please try again !');
         // An error occurred
         // ...
       });
@@ -215,7 +218,7 @@ $('#orderProceed').on('click', async function () {
   let email = $('#cardEmail').val();
   let billingAddres = $('#billAddress').val();
 
-  if (!cardName || !cardNumber) {
+  if (!$('#cashpaymet').is(':checked') && (!cardName || !cardNumber)) {
     return;
   }
   showLoader();
@@ -277,6 +280,7 @@ function getCurrentUser() {
   let currentUser = sessionStorage.getItem('currentUser');
   return JSON.parse(currentUser);
 }
+
 window.writeReview = function(wrap){
   $('#reviewwriteText').val('');
   $('#wrapnameItem').html(wrap);
@@ -360,16 +364,155 @@ function renderCart(docData, page) {
     } else {
       trows += `<td><input type="text" id="quanity${index}" value="${row.quantity}" /></td>`;
     }
-    trows += `<td id="subtotal${index}">$${+row.quantity * (row.basePrice + totalPriceWithToping)}</td>`;
+    trows += `
+    <td> $ ${Math.round(+row.quantity * (row.basePrice + totalPriceWithToping)*5)/100 }</td>
+    <td id="subtotal${index}">$${ (+row.quantity * (row.basePrice + totalPriceWithToping)) + Math.round(+row.quantity * (row.basePrice + totalPriceWithToping)*5)/100 }</td>`;
     if (!page) {
-      trows += `<td><button  id="delete${index}">Delete</button></td></tr>`;
+      trows += `
+      
+      <td><button  id="delete${index}">Delete</button></td>`;
     }
-    trows += `<td> <span class="write-review" onclick="writeReview('${row.name}')"> Write Review </span> </td></tr>`
+    if (page == 'myorders') {
+      trows += `<td> <span class="write-review" onclick="writeReview('${row.name}')"> Write Review </span> </td></tr>`
+    }else{
+      trows += '</tr>'
+    }
     totalPrice += (+row.quantity) * (row.basePrice + totalPriceWithToping);
     return row;
   });
 
   return { trows, totalPrice };
+}
+
+function lastweekDates(eventsOnDateWise){
+  var lastweekdates = [...Array(7)].map((_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - i)
+    return d.toISOString().split('T')[0];
+    });
+
+let lastWeekOrderAmount = 0;
+let lastWeekMeatRevenue =0;
+let months = moment.monthsShort();
+let optionEle = '';
+for(let j=0;j< months.length; j++){
+  optionEle += `<option value="${months[j]}">${months[j]}</option>`;
+}
+
+let yearEle = '';
+for(let u=new Date().getFullYear()-4; u<= new Date().getFullYear(); u++){
+  yearEle += `<option ${new Date().getFullYear() ==u ? 'selected':''} value="${u}">${u}</option>`;
+}
+$('#revenuYear').html(yearEle);
+$('#revenueMeatYear').html(yearEle);
+$('#monthOptions').html(optionEle);
+$('#monthMeatOptions').html(optionEle);
+
+for(let prop in eventsOnDateWise){
+  if(lastweekdates.includes(prop)){
+    let orders = eventsOnDateWise[prop];
+
+    lastWeekOrderAmount +=  orders.reduce((acc, curr) => {
+     let basePrice = +curr.basePrice;
+     let topingPrc = 0;
+     let meatPrc=0;
+     if(curr.selectedTopings){
+      topingPrc = curr.selectedTopings.reduce((a,c)=>{
+        return a + +c.basePrice;
+      },0);
+     }
+
+     if(curr.selectedMeats){
+      meatPrc = curr.selectedMeats.reduce((a,c)=>{
+        return a + +c.price;
+      },0);
+      lastWeekMeatRevenue += meatPrc;
+     }
+
+     return acc+  (+curr.quantity * (basePrice+topingPrc+meatPrc));
+
+    },0);
+
+  }
+
+}
+$('#lastWeekRevenue').html('$'+lastWeekOrderAmount);
+$('#lastWeekMeatRevenue').html('$'+lastWeekMeatRevenue);
+
+
+}
+
+function montnthWiseMeatRevenue(event){
+  let year = $('#revenueMeatYear').val();
+  let month = $('#monthMeatOptions').val();
+  let monthlyRevenue = 0;
+  let monthMeatRevenue = 0;
+  if(!this || !this[year] || !this[year][month]){
+    $('#monthsMeatRevenue').html('$'+monthlyRevenue);
+
+    return;
+  }
+
+  let selectedYearMonth = this[year][month];
+
+  for(let itm=0; itm<selectedYearMonth.length; itm++) {
+      let curr = selectedYearMonth[itm];
+       if(curr.selectedMeats){
+        meatPrc = curr.selectedMeats.reduce((a,c)=>{
+          return a + +c.price;
+        },0);
+          monthMeatRevenue += meatPrc;
+      }
+
+  }
+  $('#monthsMeatRevenue').html('$'+monthMeatRevenue);
+
+
+}
+
+function montnthWiseRevenue(event){
+  let year = $('#revenuYear').val();
+  let month = $('#monthOptions').val();
+  let monthlyRevenue = 0;
+
+  if(!this || !this[year] || !this[year][month]){
+    $('#monthRevenue').html('$'+monthlyRevenue);
+
+    return;
+  }
+  
+  let selectedYearMonth = this[year][month];
+  
+
+  for(let itm=0; itm<selectedYearMonth.length; itm++) {
+    let curr = selectedYearMonth[itm];
+
+    // monthlyRevenue +=  item.reduce((acc, curr) => {
+      let basePrice = +curr.basePrice || 0;
+      let topingPrc = 0;
+      let meatPrc=0;
+      if(curr.selectedTopings){
+       topingPrc = curr.selectedTopings.reduce((a,c)=>{
+         return a + +c.basePrice;
+       },0);
+      }
+ 
+      if(curr.selectedMeats){
+       meatPrc = curr.selectedMeats.reduce((a,c)=>{
+         return a + +c.price;
+       },0);
+      //  lastWeekMeatRevenue += meatPrc;
+      }
+ 
+      monthlyRevenue +=  (+curr.quantity * (basePrice+topingPrc+meatPrc));
+ 
+    //  },0);
+
+    }
+    $('#monthRevenue').html('$'+monthlyRevenue);
+
+
+
 }
 
 function calnederOrder(type){
@@ -387,8 +530,10 @@ async function listOfAdminOrders(type){
  let eventsOnDateWise = {
 
  };
+ let yearData ={};
  let ordersItemWise = {};
  let meatOrders = {};
+ let meatOrdersCategory = {};
   if(adminOrdersList && adminOrdersList.length){
     adminOrdersList.map(order=>{
            order.items.map(item=>{
@@ -412,17 +557,55 @@ async function listOfAdminOrders(type){
               }else if(item.selectedMeats && item.selectedMeats.length){
                 meatOrders[formatedDate] =1;
               }
+
+              if(item.selectedMeats && item.selectedMeats.length){
+                item.selectedMeats.map(itm=>{
+                     if(meatOrdersCategory[formatedDate+':'+itm.item]){
+                      meatOrdersCategory[formatedDate+':'+itm.item] = meatOrdersCategory[formatedDate + ':'+itm.item] +1;
+                     }else{
+                      meatOrdersCategory[formatedDate+':'+itm.item] = 1;
+                     }
+               
+
+                });
+              }
        
             }
+            if(item.orderPlacingTime){
+            let dt = new Date(item.orderPlacingTime);
+            let month = (+dt.getMonth()+1) +'';
+            month = month.length>1 ? (month): '0'+ ( month);
+            let shortMonth = moment(month, 'M').format('MMM');
+            if(!yearData[dt.getFullYear()]){
+              yearData[dt.getFullYear()]  ={};
+              yearData[dt.getFullYear()][shortMonth] =[item];
+            }
+             else if(yearData[dt.getFullYear()]){
+              if(!yearData[dt.getFullYear()][shortMonth]){
+                yearData[dt.getFullYear()][shortMonth] =[item];
+              }else if(yearData[dt.getFullYear()][shortMonth]){
+                yearData[dt.getFullYear()][shortMonth].push(item);
+              }
+            }
+          }
 
             if(formatedDate && item.orderPlacingTime && !eventsOnDateWise[formatedDate]){
       
-              eventsOnDateWise[formatedDate] = [item]
+              eventsOnDateWise[formatedDate] = [item];
             }else if(item.orderPlacingTime && eventsOnDateWise[formatedDate]){
               eventsOnDateWise[formatedDate].push(item);
             }
            });
     });
+
+    lastweekDates(eventsOnDateWise);
+    $('#revenuYear').on('change', montnthWiseRevenue.bind(yearData));
+    $('#monthOptions').on('change', montnthWiseRevenue.bind(yearData));
+    $('#revenueMeatYear').on('change', montnthWiseMeatRevenue.bind(yearData));
+    $('#monthMeatOptions').on('change', montnthWiseMeatRevenue.bind(yearData));
+    
+    // montnthWiseRevenue(yearData);
+    $('#revenuYear').trigger('change');
   }
 
   if(!type || type =='all' || type == 'totalOrders'){
@@ -452,17 +635,22 @@ if(!type || type =='all' || type == 'itemwise'){
 
 
 if(!type || type =='all' || type == 'meatorders'){
-  for(let prop in meatOrders){
+  for(let prop in meatOrdersCategory){
+    let categ = prop.split(':');
     calendarEvent.push({
       // id:itemSplit[1],
-      title: "Meat: " + meatOrders[prop],
-      start: prop
+      title: categ[1] +':'+ meatOrdersCategory[prop],
+      start: categ[0]
     });
   }
+  
 
 }
  console.log(calendarEvent);
- renderFullcalendar(calendarEvent);
+ if(typeof FullCalendar != 'undefined'){
+
+   renderFullcalendar(calendarEvent);
+ }
 
 }
 async function getCartItems(page, tblName) {
@@ -484,16 +672,39 @@ async function getCartItems(page, tblName) {
        adminOrdersList = adminOrdersSnapshot.docs.map(doc => doc.data());
     }
    
+    let copyOfAdminOrders = [];
+    
     window.orderStatusChange = async function (thisDoc, index, orderIndex, noalert) {
       showLoader();
-      let selectedOrderC = adminOrdersList[index];
-      if (selectedOrderC.items && selectedOrderC.items.length) {
-        let orderSelected = selectedOrderC.items[orderIndex];
-        orderSelected.status = typeof thisDoc != 'string' ? $(thisDoc).val(): thisDoc;
-        if(orderSelected.status == 'Delivered'){
-          orderSelected.orderTime = 0;
+      let selectedOrderC = copyOfAdminOrders[index];
+    //  let adminlist = adminOrdersList;
+    let lsOrderInex;
+     let lstOrder;
+      for(let y=0; y<adminOrdersList.length; y++) {
+        if(adminOrdersList[y].items && adminOrdersList[y].items.length){
+          lstOrder= adminOrdersList[y].items.find(rt=>{
+            // if(rt.orderId){
+              return  (index+''+orderIndex+ adminOrdersList[y].cardInfo.uid) == selectedOrderC.orderId
+            // }
+            // if(rt.name){
+            //   return  rt.name == selectedOrderC.name
+            // }
+          });
+          if(lstOrder){
+            lsOrderInex = y;
+            break;
+          }
         }
+
       }
+
+      // if (selectedOrderC.items && selectedOrderC.items.length) {
+        let orderSelected = selectedOrderC;
+        orderSelected.status = lstOrder.status = typeof thisDoc != 'string' ? $(thisDoc).val(): thisDoc;
+        if(orderSelected.status == 'Delivered'){
+          orderSelected.orderTime = lstOrder.orderTime = 0;
+        }
+      // }
       // adminOrdersList.map(async (or, idex)=>{
 
       const orderItems = doc(firbasedb, "Orders", selectedOrderC.cardInfo.uid);
@@ -506,7 +717,7 @@ async function getCartItems(page, tblName) {
       //   orders.items  =[];
       // }
       await setDoc(orderItems, {
-        items: selectedOrderC.items,
+        items: adminOrdersList[lsOrderInex].items,
         cardInfo: selectedOrderC.cardInfo
       });
       hideLoader();
@@ -520,12 +731,29 @@ async function getCartItems(page, tblName) {
     async function updateTime(indx, index, value) {
 
       showLoader();
-      adminOrdersList[indx].items[index].orderTime = value;
-      let selectedOrderC = adminOrdersList[indx];
+      // adminOrdersList[indx].items[index].orderTime = value;
+
+      let lsOrderInex;
+      let selectedOrderC = copyOfAdminOrders[indx];
+      let lstOrder;
+       for(let y=0; y<adminOrdersList.length; y++) {
+         if(adminOrdersList[y].items && adminOrdersList[y].items.length){
+           lstOrder= adminOrdersList[y].items.find(rt=>{
+               return  (indx+''+index+ adminOrdersList[y].cardInfo.uid) == selectedOrderC.orderId
+ 
+           });
+           if(lstOrder){
+             lsOrderInex = y;
+             break;
+           }
+         }
+ 
+       }
+      lstOrder.orderTime = value;
       const orderItems = doc(firbasedb, "Orders", selectedOrderC.cardInfo.uid);
 
       await setDoc(orderItems, {
-        items: selectedOrderC.items,
+        items:adminOrdersList[lsOrderInex].items,
         cardInfo: selectedOrderC.cardInfo
       });
       hideLoader();
@@ -535,15 +763,41 @@ async function getCartItems(page, tblName) {
 
     }
     if (page == 'adminorders') {
+     
       //  let use =   getAuth(firebaseApp)
       //.getUser(cuser.uid);
     window.adminOrderClick =  function adminOrderClick(thisOr, index, orderIndex){
    
-      let order = adminOrdersList[index];
-      if (order.items && order.items.length) {
-        let orderSelected = order.items[orderIndex];
+      let order = copyOfAdminOrders[index];
+      if (order) {
+        let orderSelected = order;
         sessionStorage.setItem('currentFood', JSON.stringify(orderSelected));
         geCustomeItemsForFood();
+        let reviews ='';
+        fetch(firebaseAPI + 'getReview?wrap=' + orderSelected.name).then(response => response.json()).then(data => {
+          console.log(data);
+          let option = "";
+           for(let prop in data){
+            for(let i=0; i< data[prop].length; i++){
+
+              reviews += `
+              <div class="review">
+               <span class="uname"> ${prop} : </span>
+  
+               <span class="rveiw-text">
+               ${data[prop][i]}
+               </span>
+  
+              </div>
+              `;
+            }
+         
+
+           }
+
+           $("#reviewContainer").html(reviews);
+        });
+
        $('#orderDetails').modal('show');
 
       }
@@ -568,6 +822,19 @@ async function getCartItems(page, tblName) {
       
 
       if (adminOrdersList) {
+        // let copyOfAdminOrders = [];
+
+        adminOrdersList.map(order=>{
+
+          order.items.map(item=>{
+
+            let newItem = JSON.parse(JSON.stringify(item));
+            newItem.cardInfo = order.cardInfo;
+            copyOfAdminOrders.push(newItem);
+
+          });
+        });
+
         let tr = '';
   
         let statsList = [
@@ -575,14 +842,18 @@ async function getCartItems(page, tblName) {
           { status: "Delivered", id: 2 },
           { status: "Accepted", id: 3 },
         ];
-        adminOrdersList.map((or, indx) => {
-          let cardDetails = or.cardInfo;
-          if (!or.items) {
-            or.items = [];
-          }
+        let index = 10;
+        copyOfAdminOrders.sort((a,b)=>{
+          return new Date(b.orderPlacingTime) - new Date(a.orderPlacingTime);
+        }).map((itm, indx) => {
+          index++;
+          let cardDetails = itm.cardInfo;
+          // if (!itm.items) {
+          //   or.items = [];
+          // }
           let totalOderPrice = 0;
           //let totalPriceWithToping = 0;
-          or.items.map((itm, index) => {
+          // or.items.map((itm, index) => {
             totalOderPrice = itm.basePrice;
             if(itm.selectedMeats && itm.selectedMeats.length){
               totalOderPrice += itm.selectedMeats.reduce((acc, curr, index) => {
@@ -610,7 +881,7 @@ async function getCartItems(page, tblName) {
               cursor: pointer;" onclick="adminOrderClick(this, ${indx}, ${index})">${itm.name}</span></td>
               <td>${cardDetails.cname || cardDetails.cardName}</td>
               <td>${itm.quantity}</td>
-              <td>$${ +itm.quantity * totalOderPrice}</td>`;
+              <td>$${ +itm.quantity * totalOderPrice + (Math.round(5* +itm.quantity * totalOderPrice)/100)}</td>`;
 
             let statustd = `<td><select onchange='orderStatusChange(this, ${indx}, ${index})' name="statuses" id="status-${index}">`;
             statsList.map(st => {
@@ -627,12 +898,12 @@ async function getCartItems(page, tblName) {
 
             statustd += `</select></td>
             <td><input type="text" value="${itm.orderTime || ''}"  id="orderTime-${indx}-${index}"/></td>
-              <td>Card</td>
+              <td>${cardDetails.cardNumber ? 'Card':'Cash'}</td>
               </tr>
             `;
             tr += statustd;
             return itm;
-          });
+          // });
         });
 
         $('#adminOrders tbody').html(tr);
@@ -660,7 +931,7 @@ async function getCartItems(page, tblName) {
         }, 100000);
         adminOrdersList.map((or, indx) => {
           or.items.map((itm, index) => {
-
+            index = index+11;
             $('#orderTime-' + indx + '-' + index).on('blur', async function (e) {
               //updateTime.bind({indx:this.indx, index:this.index});
               let selectedOrderC = adminOrdersList[this.indx];
@@ -701,7 +972,8 @@ async function getCartItems(page, tblName) {
       });
 
       $('#orderDetails').html(trows);
-      $('#orderTotal').html('$ ' + totalPrice);
+      var tPtri= +totalPrice  + (Math.round(5 * +totalPrice) / 100);
+      $('#orderTotal').html('$ ' + tPtri);
     } else {
       if (!docData) {
         docData = {
@@ -745,7 +1017,9 @@ async function getCartItems(page, tblName) {
       trows = obj.trows;
       totalPrice = obj.totalPrice;
       $('#customers_cart tbody').html(trows);
-      $('#totalPrice').html(totalPrice);
+      var taxPrice  = Math.round(5 * +totalPrice) / 100;
+      $('#taxPrice').html(taxPrice);
+      $('#totalPrice').html(totalPrice + taxPrice);
       docData.items.map((el, index) => {
         $("#customers_cart tbody td").on('change', "#quanity" + index, (function (e, el) {
           let item = docData.items[this];
@@ -786,7 +1060,7 @@ async function getCartItems(page, tblName) {
             totalPrice += (+el.quantity) * (+el.basePrice + totalPriceWithToping + totalMeatPrice);
 
           });
-          $('#totalPrice').html(totalPrice);
+          $('#totalPrice').html(totalPrice + taxPrice);
           // console.log(e, docData.items[this]);
         }).bind(index));
 
@@ -795,7 +1069,7 @@ async function getCartItems(page, tblName) {
           let item = docData.items[this];
           // item.quantity = e.currentTarget.value;
           docData.items = docData.items.filter(et => {
-            return et.id != item.id;
+            return et.name != item.name;
           });
           const cartItems = doc(firbasedb, "cart", cuser.uid);
           await setDoc(cartItems, {
@@ -1713,27 +1987,157 @@ function renderFullcalendar(events){
   // var event = calendar.getEventById('a') // an event object!
   // var start = event.start // a property (a Date object)
   // console.log(start.toISOString()) // "2018-09-01T00:00:00.000Z"
-  function forgotPassword(){
-    let email = prompt("Please enter your email", "");
-    if(email !=null){
-  
-      const auth = getAuth();
-      sendPasswordResetEmail(auth, email)
-        .then(() => {
-          alert("Password reset email sent!");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          if(error && error.code == 'auth/user-not-found'){
-            alert("Please enter valid email address!")
-  
-          }
-          // ..
-        });
-    }
+}
+
+function forgotPassword(){
+  let email = prompt("Please enter your email", "");
+  if(email !=null){
+
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Password reset email sent!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if(error && error.code == 'auth/user-not-found'){
+          alert("Please enter valid email address!")
+
+        }
+        // ..
+      });
   }
 }
+$('#dlgUpdate').hide();
+$('#currentUser').on('click', async function(){
+  $('#dlgregister').hide();
+  $('#dlgPwd').hide();
+  $('#dlgConfirmPwd').hide();
+  $('#semail').attr('readonly', true);
+  $('#dlgUpdate').show();
+  $('#dlgUpdate #changePassowrdLnk').html('<a href="#" onclick="changePassword()">Change Password</a>');
+  let curUser = getCurrentUser();
+ let userDetails  = await getDoc(doc(firbasedb, "USERS", curUser.uid));
+
+ let udata = userDetails.data();
+  $('#BModalSignup .modal-header h3').html('Profile');
+
+  $('#fname').val(udata.fname);
+  $('#sphone').val(udata.phoneNumber);
+
+  $('#lname').val(udata.lname);
+  $('#semail').val(udata.email);
+
+     $('#BModalSignup').modal('show');
+});
+
+$('#dlgUpdateBtn').on('click', async function(){
+  showLoader();
+  let fname = $('#fname').val();
+  let lname = $('#lname').val();
+  let sphone = $('#sphone').val();
+  let semail = $('#semail').val();
+  let curUser = getCurrentUser();
+  await setDoc(doc(firbasedb, "USERS", curUser.uid), {
+    phoneNumber: sphone,
+    lname:lname,
+    fname: fname,
+    email: semail
+
+  });
+  sessionStorage.setItem("displayname", fname +' '+ lname);
+  hideLoader();
+  $('#infoMsg').html("User updated successfully! Please login");
+  clearSignupForm();
+  pageReload();
+});
+
+function changePassword(){
+  
+  const auth = getAuth();
+let usr= getCurrentUser();
+  sendPasswordResetEmail(auth, usr.email)
+    .then(() => {
+      alert("Password change  line sent to your mail id, please check!");
+      pageReload();
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if(error && error.code == 'auth/user-not-found'){
+        alert("Please enter valid email address!")
+
+      }
+      // ..
+    });
+}
+
+async function runOrdersNotification() {
+  let adminOrders = collection(firbasedb, 'Orders');
+  let adminOrdersSnapshot = await getDocs(adminOrders);
+  let adminOrdersList = adminOrdersSnapshot.docs.map(doc => doc.data());
+  if(adminOrdersList && adminOrdersList.length){
+    let totalOrders = 0;
+    totalOrders = adminOrdersList.reduce((acc, nt)=>{
+      return nt.items.length + acc;
+    }, 0);
+   
+    sessionStorage.setItem('currentOrders', totalOrders);
+  }
+
+
+}
+
+function monitorOrders(){
+  const cuser = getCurrentUser();
+  if(cuser && cuser.email != 'admin@gmail.com'){
+    return;
+  }
+  const q = query(collection(firbasedb, "Orders"));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    // const cities = [];
+    let currentOrderCount = sessionStorage.getItem('currentOrders');
+    let totalOrders = 0;
+    querySnapshot.forEach((doc) => {
+      totalOrders += doc.data().items.length;
+  });
+  sessionStorage.setItem('currentOrders', totalOrders);
+
+   if(currentOrderCount && +totalOrders > +currentOrderCount ){
+
+  Notification.requestPermission().then((permission) => {
+    // If the user accepts, let's create a notification
+    if (permission === "granted") {
+      const notification = new Notification("New order was placed !");
+      // …
+    }
+  });
+
+ }
+
+  // console.log(cities);
+    //  alert("Order placed !");
+  });
+}
+// setInterval(async()=>{
+//   let currentOrderCount = sessionStorage.getItem('currentOrders');
+//    await runOrdersNotification();
+//  let latestCount =  sessionStorage.getItem('currentOrders');
+//  if(currentOrderCount && +latestCount > +currentOrderCount ){
+
+//   Notification.requestPermission().then((permission) => {
+//     // If the user accepts, let's create a notification
+//     if (permission === "granted") {
+//       const notification = new Notification("New order placed !");
+//       // …
+//     }
+//   });
+
+//  }
+// }, 10000);
+
+
 
 
 

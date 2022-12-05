@@ -19,16 +19,18 @@
 
         <link href="css/bootstrap-icons.css" rel="stylesheet">
 
-
-        <link href="css/tooplate-cleracreek.css" rel="stylesheet">
-
-        <link href="css/tooplate-clearCreek.css" rel="stylesheet">
-
+        <link href="css/tooplate-crispy-kitchen.css" rel="stylesheet">
         <script type="text/javascript" src="js/cart.js"></script>
         <link href="social-icon-blink bi-facebook" rel="stylesheet">
         <link href="css/styles.css" rel="stylesheet">
         
+<!--
 
+Tooplate 2129 Crispy Kitchen
+
+https://www.tooplate.com/view/2129-crispy-kitchen
+
+-->
     </head>
     
     <body>
@@ -258,12 +260,12 @@
                              
         
                                
-                                <div class=" col-lg-6 col-12">
+                                <div class=" col-lg-6 col-12" id="dlgPwd">
                                     <label for="spassowrd" class="form-label">Password</label>
         
                                     <input type="password" minlength="6" name="spassoword" id="spassowrd"  class="form-control">
                                 </div>
-                                <div class="col-lg-6 col-12">
+                                <div class="col-lg-6 col-12" id="dlgConfirmPwd">
                                     <label for="scpassowrd" class="form-label">Confirm Password</label>
         
                                     <input type="password"  minlength="6" name="scpassowrd" id="scpassowrd"  class="form-control">
@@ -271,8 +273,16 @@
                                 <div class="col-lg-4 col-12 ms-auto">
                                     <span id="infoMsg"></span>
                                 </div>
-                                <div class="col-lg-6 col-12 ms-auto">
+                                <div class="col-lg-6 col-12 ms-auto" id="dlgregister">
                                     <button type="button" id="signup" class="form-control">Register</button>
+                                </div>
+                                <div class="col-lg-6 col-12 ms-auto" id="dlgUpdate">
+                                    <button type="button" id="dlgUpdateBtn" class="form-control">Update</button>
+
+                                    <div id="changePassowrdLnk">
+
+                                    </div>
+                                
                                 </div>
                             </form>
                         </div>
@@ -320,7 +330,7 @@
         
                             <div class="col-lg-4 col-8" style="background-color:white">
                               
-                              <span class="psw">Forgot <a href="#">password?</a></span>
+                              <span class="psw">Forgot <a href="#" onclick="forgotPassword()">password?</a></span>
                             </div><br>
         
                                 <div class="space">
@@ -376,8 +386,8 @@
         <script  src="js/firebase.db.js"></script>
         <script type="module">
                  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-                import { getFirestore, doc, getDoc, setDoc,addDoc, getDocs, collection, updateDoc,  arrayUnion, arrayRemove  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-                import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+                import { getFirestore, doc, getDoc, setDoc,addDoc, getDocs, collection, updateDoc,  arrayUnion, arrayRemove, query, where, onSnapshot   } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+                import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail,createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
                 const firebaseConfig = {
             apiKey: "AIzaSyCZGi5P1yRqYrU0Oe2_FFEObI9MGVjATvU",
             authDomain: "clear-creek-catering-5948b.firebaseapp.com",
@@ -389,6 +399,9 @@
             };
 
       window.collection = collection;
+      window.query = query;
+  window.where = where;
+  window.onSnapshot = onSnapshot;
       window.getDoc = getDoc;
       window.getDocs = getDocs;
       window.getAuth = getAuth;
@@ -401,6 +414,7 @@
       window.updateDoc = updateDoc;
       window.arrayUnion =arrayUnion;
       window.arrayRemove = arrayRemove ;
+      window.sendPasswordResetEmail= sendPasswordResetEmail;
       
       window.doc = doc;
         window.firebaseApp = initializeApp(firebaseConfig);
@@ -427,6 +441,7 @@ $(document).ready(function () {
 
         fetchMenuItems();
         getLoationLatLng();
+        monitorOrders();
     // }, 1000);
         });
 

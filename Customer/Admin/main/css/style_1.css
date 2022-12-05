@@ -1,19 +1,66 @@
+/*
+
+Table of Sass Contents
+
+1. Abstracts
+    _bs-custom.scss 
+    _inheritance.scss
+    _maps.scss
+    _mixin.scss
+    _variable.scss
+
+2. bootstrap 
+    -Here goes all official bootstrap scss files
+
+3. Global/Base
+    _color.scss
+    _custom-grid.scss
+    _fonts.scss
+    _helper.scss
+    _reset.scss
+
+4. layout
+    +footer
+    +header
+    +rtl
+    +sidebar
+    +tables
+    +theme
+    +version-dark
+
+5. Conponents
+    +app
+    +charts
+    +forms
+    +map
+    +uc
+    +ui
+    +widget
+
+6. Page
+    _index-1.scss
+    _page-error.scss
+    _page-register.scss
+    _page-signin.scss
+    _page-user-lock.scss
+    _page-user-lock.scss
+
+*/
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700");
-@import url(../../assets/plugins/animate/animate.min.css);
-@import url(../../assets/plugins/metismenu/css/metisMenu.min.css);
 @import url(../icons/font-awesome/css/font-awesome.min.css);
 @import url(../icons/simple-line-icons/css/simple-line-icons.css);
-@import url(../icons/flag-icon-css/flag-icon.min.css);
-@import url(../icons/material-design-iconic-font/materialdesignicons.min.css);
-@import url(../icons/pe-icon-set-weather/css/pe-icon-set-weather.min.css);
-@import url(../icons/linear-icons/style.css);
 @import url(../icons/weather-icons/css/weather-icons.min.css);
 @import url(../icons/cryptocoins/css/cryptocoins.css);
 @import url(../icons/cryptocoins/css/cryptocoins-colors.css);
 @import url(../icons/linea-icons/linea.css);
 @import url(../icons/ionicons/css/ionicons.css);
 @import url(../icons/themify-icons/themify-icons.css);
-
+@import url(../icons/flag-icon-css/flag-icon.min.css);
+@import url(../icons/material-design-iconic-font/materialdesignicons.min.css);
+@import url(../icons/pe-icon-set-weather/css/pe-icon-set-weather.min.css);
+@import url(../icons/linear-icons/style.css);
+@import url(../../assets/plugins/animate/animate.min.css);
+@import url(../../assets/plugins/metismenu/css/metisMenu.min.css);
 @import url(../../assets/plugins/toastr/css/toastr.min.css);
 .dropdown-mega-menu .ext-link.link-1 a, .pricing-wrapper .single-pricing-table .upper-border.style-1, .pricing-wrapper .single-pricing-table .plan-price.style-1, .pricing-wrapper .single-pricing-table .btn.style-1:hover {
   background: #f0a907;
@@ -61,36 +108,35 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-    --blue: blue;
-    --indigo: #727cf5;
-    --purple: #6f42c1;
-    --pink: #6c757d;
-    --red: #fa5c7c;
-    --orange: #ffbc00;
-    --yellow: #FFFA6F;
-    --green: #0acf97;
-    --teal: #20c997;
-    --cyan: #39afd1;
-    --white: #fff;
-    --gray: #6c757d;
-    --gray-dark: #313a46;
-    --primary: #727cf5;
-    --secondary: #6c757d;
-    --success: #0acf97;
-    --info: #39afd1;
-    --warning: #ffbc00;
-    --danger: #fa5c7c;
-    --light: #e3eaef;
-    --dark: #1b1d1f;
-    --breakpoint-xs: 0;
-    --breakpoint-sm: 576px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
-    --breakpoint-xxl: 1440;
-    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji","Gill Sans", sans-serif;
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
+  --blue: blue;
+  --indigo: #727cf5;
+  --purple: #6f42c1;
+  --pink: #6c757d;
+  --red: #fa5c7c;
+  --orange: #ffbc00;
+  --yellow: #FFFA6F;
+  --green: #0acf97;
+  --teal: #20c997;
+  --cyan: #39afd1;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #313a46;
+  --primary: #727cf5;
+  --secondary: #6c757d;
+  --success: #0acf97;
+  --info: #39afd1;
+  --warning: #ffbc00;
+  --danger: #fa5c7c;
+  --light: #e3eaef;
+  --dark: #1b1d1f;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1440;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 *,
 *::before,

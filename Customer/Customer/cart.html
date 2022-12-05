@@ -20,19 +20,19 @@
 
     <link href="css/bootstrap-icons.css" rel="stylesheet">
 
-
-    <link href="css/tooplate-cleracreek.css" rel="stylesheet">
-
-    <link href="css/tooplate-clearCreek.css" rel="stylesheet">
-
+    <link href="css/tooplate-crispy-kitchen.css" rel="stylesheet">
     <link href="css/cart.css" rel="stylesheet">
     <link href="social-icon-blink bi-facebook" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
         <!-- JAVASCRIPT FILES -->
    
+    <!--
 
+    Tooplate 2129 Crispy Kitchen
 
+    https://www.tooplate.com/view/2129-crispy-kitchen
 
+    -->
     <style>
       *, ::after, ::before {
         box-sizing: inherit;
@@ -116,7 +116,7 @@
                     <div class="col-lg-10 col-12 mx-auto">
                         <h1 class="text-white">Cart</h1>
 
-                        <strong class="text-white">List your cravings here!!!</strong>
+                        <strong class="text-white">Listing your cravings</strong>
                     </div>
 
                 </div>
@@ -138,6 +138,7 @@
                             <th class="product-price">Price</th>
                             <th class="product-quantity">Quantity</th>
                             <!-- <th class="product-remove">Remove</th> -->
+                            <th class="product-tax">5% Tax</th>
                             <th class="product-subtotal">Subtotal</th>
                             <th class="product-subtotal">Actions</th>
                         </tr>
@@ -168,6 +169,7 @@
 
         <br />
 
+        <p class="total">5% Tax: +   $<span class="price" id="taxPrice"></span></p>
         <p class="total">Total Price: $<span class="price" id="totalPrice"></span></p>
         <div class="container" style = "position:relative; text-align: right;">
             <button id="cartCheckoutProceed" class="navbar-brand" >
@@ -195,7 +197,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-7 col-xs-12 tooplate-mt30">
-                    <h6 class="text-white mb-lg-4 mb-3">Location of the truck</h6>
+                    <h6 class="text-white mb-lg-4 mb-3">Location</h6>
 
                     <p id="footerLocationTruck"></p>
 
@@ -282,12 +284,12 @@
                          
     
                            
-                            <div class=" col-lg-6 col-12">
+                            <div class=" col-lg-6 col-12" id="dlgPwd">
                                 <label for="spassowrd" class="form-label">Password</label>
     
                                 <input type="password" minlength="6" name="spassoword" id="spassowrd"  class="form-control">
                             </div>
-                            <div class="col-lg-6 col-12">
+                            <div class="col-lg-6 col-12" id="dlgConfirmPwd">
                                 <label for="scpassowrd" class="form-label">Confirm Password</label>
     
                                 <input type="password"  minlength="6" name="scpassowrd" id="scpassowrd"  class="form-control">
@@ -295,8 +297,15 @@
                             <div class="col-lg-4 col-12 ms-auto">
                                 <span id="infoMsg"></span>
                             </div>
-                            <div class="col-lg-6 col-12 ms-auto">
+                            <div class="col-lg-6 col-12 ms-auto" id="dlgregister">
                                 <button type="button" id="signup" class="form-control">Register</button>
+                            </div>
+                            <div class="col-lg-6 col-12 ms-auto" id="dlgUpdate">
+                                <button type="button" id="dlgUpdateBtn" class="form-control">Update</button>
+                                <div id="changePassowrdLnk">
+
+                                </div>
+                           
                             </div>
                         </form>
                     </div>
@@ -344,7 +353,7 @@
     
                         <div class="col-lg-4 col-8" style="background-color:white">
                           
-                          <span class="psw">Forgot <a href="#">password?</a></span>
+                          <span class="psw">Forgot <a href="#" onclick="forgotPassword()">password?</a></span>
                         </div><br>
     
                             <div class="space">
@@ -401,8 +410,8 @@
     <script   src="js/firebase.db.js"></script>
     <script type="module">
              import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-            import { getFirestore, doc, getDoc, getDocs, collection, setDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-            import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+            import { getFirestore, doc, getDoc, getDocs, collection, setDoc, query, where, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+            import { getAuth, signInWithEmailAndPassword,sendPasswordResetEmail, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
             const firebaseConfig = {
             apiKey: "AIzaSyCZGi5P1yRqYrU0Oe2_FFEObI9MGVjATvU",
             authDomain: "clear-creek-catering-5948b.firebaseapp.com",
@@ -414,6 +423,9 @@
             };
 // window.$ = $;
   window.collection = collection;
+  window.query = query;
+  window.where = where;
+  window.onSnapshot = onSnapshot;
   window.getDoc = getDoc;
   window.getDocs = getDocs;
   window.getAuth = getAuth;
@@ -422,6 +434,7 @@
   window.updateProfile = updateProfile;
   window.signOut  = signOut ;
   window.setDoc = setDoc;
+  window.sendPasswordResetEmail = sendPasswordResetEmail;
   
   window.doc = doc;
     window.firebaseApp = initializeApp(firebaseConfig);
@@ -443,6 +456,7 @@
         
     $(document).ready(function(){
         getCartItems();
+        monitorOrders();
        // cartJS.fetchOrder();
     });
 </script>

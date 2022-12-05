@@ -1494,6 +1494,7 @@ pre {
   display: block;
   width: 100%;
   overflow-x: auto;
+  height: 350px;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; }
   .table-responsive > .table-bordered {
@@ -17003,6 +17004,24 @@ button {
 
 #pac-input{
   width: 100%;
+}
+
+.uname{
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px;
+  background: #f1eaea;
+}
+
+.rveiw-text{
+  padding: 5px;;
+}
+.review{
+  padding: 15px;
+}
+
+.fc-day-grid-event > .fc-content {
+  white-space: normal !important;
 }
 
 /* .fc-content {

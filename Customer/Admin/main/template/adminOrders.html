@@ -12,9 +12,10 @@
     <!-- Custom Stylesheet -->
     <link href="../../../Customer/css/bootstrap.min.css" rel="stylesheet">
 
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
     <link href="../../../Customer/css/bootstrap-icons.css" rel="stylesheet">
 
-    <link href="../../../Customer/css/tooplate-clearCreek.css" rel="stylesheet">
+    <link href="../../../Customer/css/tooplate-crispy-kitchen.css" rel="stylesheet">
     <link href="../../assets/plugins/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <style>
@@ -24,6 +25,19 @@
             width: 100%;
             /* The width is the width of the web page */
         }
+    </style>
+     <style>
+        .btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: .25em .25em;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    border: 0;
+    border-radius: .25rem;
+    opacity: .5
+}
     </style>
 
 </head>
@@ -56,13 +70,13 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="orderonline.html">Order Online</a>
+                        <a class="nav-link" href="../../../Customer/orderonline.html">Order Online</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="cart.html">Cart</a>
+                        <a class="nav-link active" href="../../../Customer/cart.html">Cart</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="myorder.html">My Orders</a>
+                        <a class="nav-link active" href="../../../Customer/myorder.html">My Orders</a>
                     </li>
                     <li class="nav-item" id="adminNav">
                         <a class="nav-link " href="/admin/main/template">Admin</a>
@@ -70,7 +84,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
+                        <a class="nav-link" href="../../../Customer/contact.html">Contact Us</a>
                     </li>
                     <div id="navLogin" class="">
                         <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
@@ -185,6 +199,7 @@
                         <p class="mb-0">Your admin</p>
                     </div>
                 </div>
+
                 <div class="row">
                     <h3>Orders</h3>
                     <div class="col">
@@ -208,6 +223,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -215,7 +231,6 @@
                         </div>
                     </div>
                 </div>
-                
 
                 <!-- <div class="row"> -->
 
@@ -604,6 +619,15 @@
 
                     <br>
                     <p class="total" >Total Price: $<span id="totalPrice"></span></p>
+
+                    <div class="col-12">
+                        <h5>Reviews :</h5>
+
+                        <div id="reviewContainer">
+
+                        </div>
+
+                    </div>
                 </div>
 
                 <div class="modal-footer"></div>
@@ -637,10 +661,10 @@
     <script src="../../../Customer/js/firebase.db.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, addDoc, getDocs, collection, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, addDoc, getDocs, collection, updateDoc, arrayUnion, arrayRemove, query, where, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
         import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword,sendPasswordResetEmail, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
         const firebaseConfig = {
             apiKey: "AIzaSyCZGi5P1yRqYrU0Oe2_FFEObI9MGVjATvU",
             authDomain: "clear-creek-catering-5948b.firebaseapp.com",
@@ -652,6 +676,9 @@
         };
 
         window.collection = collection;
+        window.query = query;
+  window.where = where;
+  window.onSnapshot = onSnapshot;
         window.getDoc = getDoc;
         window.getDocs = getDocs;
         window.getAuth = getAuth;
@@ -667,6 +694,7 @@
         window.getStorage = getStorage;
         window.ref= ref;
         window.uploadBytes= uploadBytes;
+        window.sendPasswordResetEmail = sendPasswordResetEmail;
 
         window.doc = doc;
         window.firebaseApp = initializeApp(firebaseConfig);
@@ -691,6 +719,7 @@
             getCartItems('adminorders', 'Orders');
             truckStartEndTime();
             listOfAdminOrders();
+            monitorOrders();
 
 
         });

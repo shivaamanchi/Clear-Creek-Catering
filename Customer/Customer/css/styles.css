@@ -60,3 +60,8 @@
   #customize_cart{
     width: 50%;
   }
+
+  .write-review{
+    cursor: pointer;
+    color: blue;
+  }

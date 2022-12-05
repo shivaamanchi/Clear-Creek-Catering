@@ -21,6 +21,19 @@
     <link href="../css/style.css" rel="stylesheet">
 
     <link href="../../../Customer/css/cart.css" rel="stylesheet">
+    <style>
+        .btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: .25em .25em;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    border: 0;
+    border-radius: .25rem;
+    opacity: .5
+}
+    </style>
 
 </head>
 
@@ -52,13 +65,13 @@
                    
 
                     <li class="nav-item">
-                        <a class="nav-link" href="orderonline.html">Order Online</a>
+                        <a class="nav-link" href="../../../Customer/orderonline.html">Order Online</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="cart.html">Cart</a>
+                        <a class="nav-link active" href="../../../Customer/cart.html">Cart</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="myorder.html">My Orders</a>
+                        <a class="nav-link active" href="../../../Customer/myorder.html">My Orders</a>
                     </li>
                     <li class="nav-item" id="adminNav">
                         <a class="nav-link " href="/admin/main/template">Admin</a>
@@ -66,7 +79,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
+                        <a class="nav-link" href="../../../Customer/contact.html">Contact Us</a>
                     </li>
                     <div id="navLogin" class="">
                         <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
@@ -141,6 +154,11 @@
                             
                         </ul>
                     </li>
+                    
+                    
+                    
+                    
+
                 </ul>
             </div>
         </div>
@@ -155,15 +173,15 @@
 
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
-                    <div class="itemtypecrumb-range-picker">
+                    <div class="breadcrumb-range-picker">
                         <span><i class="icon-calender"></i></span>
                         
                     </div>
                 </div>
                 <!-- <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="itemtypecrumb">
-                        <li class="itemtypecrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="itemtypecrumb-item active"><a href="javascript:void(0)">Components</a></li>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>
                     </ol>
                 </div> -->
             </div>
@@ -176,7 +194,7 @@
 						<p class="mb-0">Your admin</p>
 					</div>
                     <div class="col-12">
-                        <button id="addMenuItem" type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminMenuModal">Add items to Menu</button>
+                        <button id="addMenuItem" type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminMenuModal">Add Sandwich Wraps</button>
                         <button id="addToppings" type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminToppingModal">Add Toppings</button>
                         <button id="addMeatOptionsBtn" type="button" class="custom-btn btn btn-danger" >Add Meat Options</button>
                         <!-- <button id="addMenuItem" >Add Menu Item</button> -->
@@ -419,7 +437,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="mb-0">Add item</h3>
+                <h3 class="mb-0">Add Sandwich Wraps</h3>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -429,9 +447,9 @@
 
 
                     <div class="col-lg-6 col-12">
-                        <label for="itemname" class="form-label">itemname </label>
+                        <label for="sandwichwrapname" class="form-label">Sandwich wrap name </label>
 
-                        <input type="text" name="itemname" id="itemname" class="form-control"
+                        <input type="text" name="sandwichwrapname" id="sandwichwrapname" class="form-control"
                              required>
                     </div>
                     <br>
@@ -455,9 +473,9 @@
                     <br>
 
                     <div class="col-lg-6 col-12">
-                        <label for="itemtype" class="form-label">itemtype</label>
+                        <label for="bread" class="form-label">Bread</label>
 
-                        <input type="text" name="itemtype" id="itemtype" class="form-control"
+                        <input type="text" name="bread" id="bread" class="form-control"
                              required>
 
                             
@@ -466,9 +484,9 @@
                     <br>
 
                     <div class="col-lg-6 col-12">
-                        <label for="itemdescription" class="form-label">itemdescription</label>
+                        <label for="description" class="form-label">Description</label>
 
-                        <textarea type="text" name="itemdescription" id="itemdescription" class="form-control"
+                        <textarea type="text" name="description" id="description" class="form-control"
                              required> </textarea>
 
                             
@@ -477,9 +495,9 @@
                     <br>
 
                     <div class="col-lg-6 col-12">
-                        <label for="itemprice" class="form-label">itemPrice</label>
+                        <label for="price" class="form-label">Price</label>
 
-                        <input type="text" name="itemprice" id="itemprice" class="form-control"
+                        <input type="text" name="price" id="price" class="form-control"
                              required>
                     </div>
 
@@ -497,9 +515,7 @@
 
                     <div class="col-lg-6 col-12">
                         <input type="checkbox" id="isTodaySpecial"  name="available" >
-
-                        <label for="isTodaySpecial" class="form-label">Is Today Special?</label>
-
+                        <label for="isTodaySpecial" class="form-label">Is Today Special</label>
 
                        
                         
@@ -540,8 +556,7 @@
                 <div class="col-lg-4 col-8">
 
                     <button type="button" id="addMenuItemSave" class="form-control"
-
-                        style="background-color:green;">Save Menu</button>
+                        style="background-color:white;">Save Menu</button>
 
                 </div>
                
@@ -574,7 +589,7 @@ aria-hidden="true">
 
                 <div class="col-lg-6">
                 <div class="col-lg-6 col-12">
-                    <label for="toppingName" class="form-label">Topping Name</label>
+                    <label for="toppingName" class="form-label">Topping name </label>
 
                     <input type="text" name="toppingName" id="toppingName" class="form-control"
                          required>
@@ -612,7 +627,7 @@ aria-hidden="true">
     <table id="toppingList" class="customers_cart" cellspacing="0">
         <thead>
             <tr>
-                <th class="product-name">Topping</th>
+                <th class="product-name">Toping</th>
                 <th class="product-price">Price</th>
                 <th class="product-price">Status</th>
                 <th class="product-price">Action</th>
@@ -636,10 +651,8 @@ aria-hidden="true">
 
             <div class="col-lg-4 col-8">
 
-
                 <button type="button" id="addToppingSave" class="form-control"
-                    style="background-color:green;">Save Topping</button>
-
+                    style="background-color:white;">Save Topping</button>
 
             </div>
            
@@ -674,8 +687,8 @@ aria-hidden="true">
                 <div class="col-lg-6">
 
                     <div class="col-lg-6 col-12">
-                        <label for="itemname" class="form-label">Sandwich Wrap Name</label>
-                        <select name="itemname" id="itemname">
+                        <label for="sandwichwtapname" class="form-label">Sandwich Wrap Name</label>
+                        <select name="sandwichwtapname" id="sandwichwtapname">
                            
                           </select>
                        
@@ -696,9 +709,9 @@ aria-hidden="true">
               
 
                 <div class="col-lg-6 col-12">
-                    <label for="meatPrice" class="form-label">Price</label>
+                    <label for="mPrice" class="form-label">Price</label>
 
-                    <input type="text" name="meatPrice" id="meatPrice" class="form-control"
+                    <input type="text" name="mPrice" id="mPrice" class="form-control"
                          required>
                 </div>
 
@@ -712,7 +725,7 @@ aria-hidden="true">
     <table id="meatOptionList" class="customers_cart" cellspacing="0">
         <thead>
             <tr>
-                <th class="product-name">Add item</th>
+                <th class="product-name">Sandwich Wrap</th>
                 <th class="product-name">Meat Options</th>
                 <th class="product-price">Price</th>
                 <th class="product-price">Action</th>
@@ -737,9 +750,7 @@ aria-hidden="true">
             <div class="col-lg-4 col-8">
 
                 <button type="button" id="addMeatOptiongSave" class="form-control"
-
-                    style="background-color:green;">Save Meat Option</button>
-
+                    style="background-color:white;">Save Meat Option</button>
 
             </div>
            
@@ -776,8 +787,8 @@ aria-hidden="true">
     <script src="../../../Customer/js/firebase.db.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, addDoc, getDocs, collection, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, addDoc, getDocs, collection, updateDoc, arrayUnion, arrayRemove, query, where, onSnapshot  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword,sendPasswordResetEmail, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
         import { getStorage, ref, uploadBytes, getDownloadURL  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
         const firebaseConfig = {
             apiKey: "AIzaSyCZGi5P1yRqYrU0Oe2_FFEObI9MGVjATvU",
@@ -790,6 +801,9 @@ aria-hidden="true">
             };
 
         window.collection = collection;
+        window.query = query;
+  window.where = where;
+  window.onSnapshot = onSnapshot;
         window.getDoc = getDoc;
         window.getDocs = getDocs;
         window.getAuth = getAuth;
@@ -806,6 +820,7 @@ aria-hidden="true">
         window.ref= ref;
         window.uploadBytes= uploadBytes;
         window.getDownloadURL  = getDownloadURL ;
+        window.sendPasswordResetEmail = sendPasswordResetEmail;
 
         window.doc = doc;
         window.firebaseApp = initializeApp(firebaseConfig);
@@ -830,6 +845,7 @@ aria-hidden="true">
             setMeatOptionDropdown();
             setToppingsDropdown();
             fetchMenuItems();
+            monitorOrders();
             // geCustomeItemsForFood();
             // getCartItems('adminorders', 'Orders');
         });
